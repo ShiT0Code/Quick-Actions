@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "FreeSideBar (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "FreeSideBar (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
