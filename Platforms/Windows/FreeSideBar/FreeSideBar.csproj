@@ -14,6 +14,7 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="UI\Windows\SettingsWindow.xaml" />
+    <None Remove="UI\Windows\SideBarButton.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -43,6 +44,11 @@
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.6.241114003" />
   </ItemGroup>
   <ItemGroup>
+    <Page Update="UI\Windows\SideBarButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
     <Page Update="UI\Windows\SettingsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -63,5 +69,6 @@
     <PublishReadyToRun Condition="'$(Configuration)' != 'Debug'">True</PublishReadyToRun>
     <PublishTrimmed Condition="'$(Configuration)' == 'Debug'">False</PublishTrimmed>
     <PublishTrimmed Condition="'$(Configuration)' != 'Debug'">True</PublishTrimmed>
+    <DefaultLanguage>zh-hans-cn</DefaultLanguage>
   </PropertyGroup>
 </Project>

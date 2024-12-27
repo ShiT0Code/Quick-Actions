@@ -19,17 +19,21 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal">
-            <Image Source="Assets\Square150x150Logo.scale-200.png" Width="28"/>
+        <StackPanel Orientation="Horizontal" Padding="10">
+            
             <TextBlock Text="侧边栏设置"/>
         </StackPanel>
 
         <NavigationView
-            Grid.Row="1"
+            Grid.RowSpan="2"
             PaneDisplayMode="Top"
             IsSettingsVisible="False"
             IsBackButtonVisible="Collapsed">
-            
+            <NavigationView.MenuItems>
+                <NavigationViewItem Content="常规"/>
+                <NavigationViewItem Content="外观"/>
+                <NavigationViewItem Content="关于"/>
+            </NavigationView.MenuItems>
         </NavigationView>
     </Grid>
 </Window>

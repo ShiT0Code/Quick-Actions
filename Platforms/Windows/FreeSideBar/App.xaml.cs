@@ -28,6 +28,9 @@ namespace FreeSideBar
         {
             m_window = new SettingsWindow();
             m_window.Activate();
+
+            var sideBar = new SideBarButton();
+            sideBar.Activate();
         }
 
         private Window? m_window;
