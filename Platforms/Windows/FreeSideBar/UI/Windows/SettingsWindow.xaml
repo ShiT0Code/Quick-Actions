@@ -29,6 +29,9 @@
             PaneDisplayMode="Top"
             IsSettingsVisible="False"
             IsBackButtonVisible="Collapsed">
+            <NavigationView.Resources>
+                
+            </NavigationView.Resources>
             <NavigationView.MenuItems>
                 <NavigationViewItem Content="常规"/>
                 <NavigationViewItem Content="外观"/>
