@@ -25,21 +25,18 @@
         </StackPanel>
 
         <NavigationView
-            Grid.RowSpan="2"
+            Grid.Row="1"
             PaneDisplayMode="Top"
             IsSettingsVisible="False"
             IsBackButtonVisible="Collapsed">
-            <NavigationView.Resources>
-                <Style TargetType="NavigationView">
-                    <Setter Property="HorizontalAlignment" Value="Center"/>
-                </Style>
-            </NavigationView.Resources>
             
             <NavigationView.MenuItems>
-                <NavigationViewItem Content="常规"/>
+                    <NavigationViewItem Content="常规"/>
                 <NavigationViewItem Content="外观"/>
                 <NavigationViewItem Content="关于"/>
             </NavigationView.MenuItems>
+            
+            1234
         </NavigationView>
     </Grid>
 </Window>
