@@ -9,7 +9,7 @@
     mc:Ignorable="d"
     Title="SideBarButton">
 
-    <Grid>
-
-    </Grid>
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Button Height="64" Width="6"/>
+    </StackPanel>
 </Window>
