@@ -24,41 +24,25 @@ namespace FreeSideBar.UI.Windows
     /// <summary>
     /// An empty window that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class SideBarButton : Window
+    public sealed partial class SideBarMenu : Window
     {
-        public SideBarButton()
+        public SideBarMenu()
         {
             this.InitializeComponent();
 
-
-            RectInt32 Bounds = new RectInt32(-116, 540, 15, 100);
+            RectInt32 Bounds = new RectInt32(15, 460, 200, 300);
 
             if (App.IsRight)
-            {
-                SideBar.HorizontalAlignment = HorizontalAlignment.Left;
-                Bounds = new RectInt32(1420, 540, 25, 100);
-
-                this.Title = "Right";
-
-                App.IsRight = false;
-            }
-            else
-            {
-                this.Title = "Left";
-
-                App.IsRight = true; 
-            }
+                Bounds = new RectInt32(1225, 460, 200, 300);
 
             this.AppWindow.MoveAndResize(Bounds);
 
             this.ExtendsContentIntoTitleBar = true;
-            this.SystemBackdrop = new WinUIEx.TransparentTintBackdrop();
 
             this.AppWindow.IsShownInSwitchers = false;
             this.AppWindow.SetPresenter(Microsoft.UI.Windowing.AppWindowPresenterKind.Overlapped);
 
             var overlappedPresenter = this.AppWindow.Presenter as OverlappedPresenter;
-
             if (overlappedPresenter != null)
             {
                 overlappedPresenter.IsAlwaysOnTop = true;
@@ -69,15 +53,25 @@ namespace FreeSideBar.UI.Windows
             }
         }
 
-        private void SideBar_Click(object sender, RoutedEventArgs e)
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            if (this.Title == "Right")
-                App.IsRight = true;
-            else
-                App.IsRight = false;
+            this.Close();
+        }
 
-            var Menu=new SideBarMenu();
-            Menu.Show();
+        private void SettingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            var settings = new SettingsWindow();
+            settings.Show();
+
+            this.Close();
+        }
+
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+
+            var exiting = new ExitingWarning();
+            exiting.Show();
         }
     }
 }

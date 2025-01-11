@@ -13,8 +13,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="UI\Windows\ExitingWarning.xaml" />
     <None Remove="UI\Windows\SettingsWindow.xaml" />
     <None Remove="UI\Windows\SideBarButton.xaml" />
+    <None Remove="UI\Windows\SideBarMenu.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,9 +44,20 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.1742" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.6.241114003" />
+    <PackageReference Include="WinUIEx" Version="2.5.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="UI\Windows\ExitingWarning.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="UI\Windows\SideBarButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="UI\Windows\SideBarMenu.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

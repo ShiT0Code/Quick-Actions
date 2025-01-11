@@ -9,11 +9,11 @@
     mc:Ignorable="d"
     Title="SideBarButton">
 
-    <Window.SystemBackdrop>
-        <DesktopAcrylicBackdrop/>
-    </Window.SystemBackdrop>
-    
-    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Button Height="64" Width="6"/>
-    </StackPanel>
+    <Button HorizontalAlignment="Right"
+            VerticalAlignment="Center"
+            Width="12"
+            Height="96"
+            x:Name="SideBar"
+            Click="SideBar_Click"
+            ToolTipService.ToolTip="打开侧边栏"/>
 </Window>

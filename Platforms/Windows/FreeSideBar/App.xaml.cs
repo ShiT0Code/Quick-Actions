@@ -1,5 +1,6 @@
 ﻿using FreeSideBar.UI.Windows;
 using Microsoft.UI.Xaml;
+using WinUIEx;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -26,12 +27,15 @@ namespace FreeSideBar
         /// <param name="args">Details about the launch request and process.</param>
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
-            m_window = new SettingsWindow();
+            m_window = new SideBarButton();
             m_window.Activate();
 
-            var sideBar = new SideBarButton();
-            sideBar.Activate();
+
+            var right = new SideBarButton();
+            right.Show();
         }
+
+        public static bool IsRight { get; set; } = false;
 
         private Window? m_window;
     }

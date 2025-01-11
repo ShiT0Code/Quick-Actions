@@ -9,7 +9,7 @@
   IgnorableNamespaces="uap rescap uap18">
 
   <Identity
-    Name="bf239ca0-213a-46ee-a418-f33fcd46767e"
+    Name="bf239ca0-213a-46ee-a418-f33fcd46767a"
     Publisher="CN=hbeau"
     Version="0.0.1.0" />
 

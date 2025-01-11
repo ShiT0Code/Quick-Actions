@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window
+    x:Class="FreeSideBar.UI.Windows.SideBarMenu"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FreeSideBar.UI.Windows"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="SideBarMenu">
+
+    <Window.SystemBackdrop>
+        <DesktopAcrylicBackdrop/>
+    </Window.SystemBackdrop>
+
+    <Grid>
+        <StackPanel Orientation="Horizontal" Padding="8">
+            <TextBlock Text="侧边栏"
+                       Padding="2"
+                       HorizontalAlignment="Center"/>
+
+            <Grid Width="15"/>
+
+            <Button Click="ExitButton_Click"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    BorderBrush="Transparent"
+                    Background="Transparent"
+                    ToolTipService.ToolTip="退出应用">
+                <FontIcon Glyph="&#xF3B1;"
+                          FontSize="14"/>
+            </Button>
+
+            <Button Click="SettingsButton_Click"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    BorderBrush="Transparent"
+                    Background="Transparent"
+                    ToolTipService.ToolTip="设置">
+                <FontIcon Glyph="&#xE713;"
+                          FontSize="15"/>
+            </Button>
+
+            <Button Click="CloseButton_Click"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    BorderBrush="Transparent"
+                    Background="Transparent"
+                    ToolTipService.ToolTip="关闭菜单">
+                <FontIcon Glyph="&#xE8BB;"
+                          FontSize="12"/>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Window>
