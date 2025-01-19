@@ -1,11 +1,10 @@
-﻿using FreeSideBar.UI.Windows;
-using Microsoft.UI.Xaml;
-using WinUIEx;
+﻿using Microsoft.UI.Xaml;
+using Quick_Launch_Bar.UI;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-namespace FreeSideBar
+namespace Quick_Launch_Bar
 {
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
@@ -27,15 +26,9 @@ namespace FreeSideBar
         /// <param name="args">Details about the launch request and process.</param>
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
-            m_window = new SideBarButton();
+            m_window = new WelcomeWindow();
             m_window.Activate();
-
-
-            var right = new SideBarButton();
-            right.Show();
         }
-
-        public static bool IsRight { get; set; } = false;
 
         private Window? m_window;
     }

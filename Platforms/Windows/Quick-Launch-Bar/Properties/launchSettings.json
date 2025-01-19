@@ -1,9 +1,9 @@
 {
   "profiles": {
-    "FreeSideBar (Package)": {
+    "Quick-Launch-Bar (Package)": {
       "commandName": "MsixPackage"
     },
-    "FreeSideBar (Unpackaged)": {
+    "Quick-Launch-Bar (Unpackaged)": {
       "commandName": "Project"
     }
   }

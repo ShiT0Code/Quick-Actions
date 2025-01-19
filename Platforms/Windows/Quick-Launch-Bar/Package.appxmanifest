@@ -5,18 +5,17 @@
   xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
   xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
   xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
-  xmlns:uap18="http://schemas.microsoft.com/appx/manifest/uap/windows10/18"
-  IgnorableNamespaces="uap rescap uap18">
+  IgnorableNamespaces="uap rescap">
 
   <Identity
-    Name="bf239ca0-213a-46ee-a418-f33fcd46767a"
-    Publisher="CN=hbeau"
+    Name="app.shit0code.quicklaunchbar"
+    Publisher="CN=ShiT0Code"
     Version="0.0.1.0" />
 
-  <mp:PhoneIdentity PhoneProductId="bf239ca0-213a-46ee-a418-f33fcd46767e" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="5643a715-99ab-403b-9e57-177d84379726" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>侧边栏</DisplayName>
+    <DisplayName>快速启动栏</DisplayName>
     <PublisherDisplayName>ShiT0Code</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -33,10 +32,10 @@
   <Applications>
     <Application Id="App"
       Executable="$targetnametoken$.exe"
-      EntryPoint="$targetentrypoint$" uap18:TrustLevel="mediumIL">
+      EntryPoint="$targetentrypoint$">
       <uap:VisualElements
-        DisplayName="侧边栏"
-        Description="侧边栏"
+        DisplayName="快速启动栏"
+        Description="快速启动栏"
         BackgroundColor="transparent"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png">
