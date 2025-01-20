@@ -13,7 +13,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="UI\Pages\Settings\About.xaml" />
+    <None Remove="UI\Pages\Settings\DashBoard.xaml" />
     <None Remove="UI\Pages\Welcome\Page1.xaml" />
+    <None Remove="UI\Pages\Welcome\Page2.xaml" />
+    <None Remove="UI\Pages\Welcome\Page3.xaml" />
+    <None Remove="UI\Pages\Welcome\Page4.xaml" />
+    <None Remove="UI\SettingsWindow.xaml" />
     <None Remove="UI\WelcomeWindow.xaml" />
   </ItemGroup>
 
@@ -44,12 +50,42 @@
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.6.250108002" />
   </ItemGroup>
   <ItemGroup>
+    <Page Update="UI\Pages\Settings\About.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="UI\SettingsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="UI\Pages\Welcome\Page4.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="UI\Pages\Welcome\Page3.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="UI\Pages\Welcome\Page2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
     <Page Update="UI\WelcomeWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="UI\Pages\Welcome\Page1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="UI\Pages\Settings\DashBoard.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

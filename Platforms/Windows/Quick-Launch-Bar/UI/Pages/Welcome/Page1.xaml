@@ -8,5 +8,21 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <TextBlock Text="1"/>
+    <StackPanel Spacing="16">
+        <TextBlock Text="欢迎使用 快速启动栏！"
+                   Style="{StaticResource TitleTextBlockStyle}"
+                   FontWeight="Bold"/>
+
+        <TextBlock Text="让我们开始吧！"/>
+
+        <Button Style="{StaticResource AccentButtonStyle}"
+                Content="下一页"
+                Click="NextButton_Click">
+                <Button.KeyboardAccelerators>
+                    <KeyboardAccelerator Key="Right" Modifiers="Menu"/>
+                    <KeyboardAccelerator Key="Down" Modifiers="Menu"/>
+                    <KeyboardAccelerator Key="PageDown"/>
+            </Button.KeyboardAccelerators>
+        </Button>
+    </StackPanel>
 </Page>

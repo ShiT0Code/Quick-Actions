@@ -27,6 +27,13 @@ namespace Quick_Launch_Bar
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
             m_window = new WelcomeWindow();
+
+            var IsPassed = new SettingsManager();
+            bool Passed=IsPassed.IsWelcome();
+
+            if (Passed)
+                m_window=new SettingsWindow();
+
             m_window.Activate();
         }
 

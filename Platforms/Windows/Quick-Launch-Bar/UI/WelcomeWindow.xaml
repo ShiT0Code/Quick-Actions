@@ -19,6 +19,13 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Frame x:Name="Content" Loaded="Content_Loaded"/>
+        <StackPanel Orientation="Horizontal" Height="48" Padding="12">
+            <TextBlock Text="欢迎" VerticalAlignment="Center"/>
+        </StackPanel>
+        
+        <Frame x:Name="Content"
+               Loaded="Content_Loaded"
+               Grid.Row="1"
+               Padding="24"/>
     </Grid>
 </Window>
