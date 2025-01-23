@@ -1,6 +1,8 @@
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Animation;
 using Quick_Launch_Bar.UI.Pages.Welcome;
+using System;
 using Windows.Graphics;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -21,6 +23,7 @@ namespace Quick_Launch_Bar.UI
             AppWindow.TitleBar.PreferredHeightOption = Microsoft.UI.Windowing.TitleBarHeightOption.Tall;
 
             AppWindow.Resize(new SizeInt32(480, 400));
+            
         }
 
         private void Content_Loaded(object sender, RoutedEventArgs e)

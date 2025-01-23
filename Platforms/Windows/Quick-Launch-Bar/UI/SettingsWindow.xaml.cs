@@ -1,7 +1,6 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media.Animation;
 using Quick_Launch_Bar.UI.Pages.Settings;
-using Quick_Launch_Bar.UI.Pages.Welcome;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -13,6 +12,8 @@ namespace Quick_Launch_Bar.UI
     /// </summary>
     public sealed partial class SettingsWindow : Window
     {
+        public static int Index { get; set; } = 0;
+
         public SettingsWindow()
         {
             this.InitializeComponent();
@@ -31,6 +32,8 @@ namespace Quick_Launch_Bar.UI
             var selectedItem = (Microsoft.UI.Xaml.Controls.NavigationViewItem)args.SelectedItem;
             string selectedItemTag = ((string)selectedItem.Tag);
 
+            HeaderText.Text = ((string)selectedItem.Content);
+
             switch (selectedItemTag)
             {
                 case "DashBoard":
@@ -39,7 +42,21 @@ namespace Quick_Launch_Bar.UI
                 case "About":
                     ContentFrame.Navigate(typeof(About), null, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
                     break;
+                case "SideBar":
+                    ContentFrame.Navigate(typeof(SideBarSetting), null, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+                    break;
+                case "CC":
+                    ContentFrame.Navigate(typeof(ContorlCSetting), null, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+                    break;
             }
+
+            Index = -1;
+        }
+
+        private void ContentFrame_Navigating(object sender, Microsoft.UI.Xaml.Navigation.NavigatingCancelEventArgs e)
+        {
+            if (Index != -1)
+                Nav.SelectedItem = Nav.MenuItems[Index];
         }
     }
 }

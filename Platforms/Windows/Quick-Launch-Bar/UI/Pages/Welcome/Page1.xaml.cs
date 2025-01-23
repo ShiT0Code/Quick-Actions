@@ -1,5 +1,7 @@
+using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Animation;
+using System;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -19,6 +21,11 @@ namespace Quick_Launch_Bar.UI.Pages.Welcome
         private void NextButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
         {
             Frame.Navigate(typeof(Page2), null, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+        }
+
+        private void ExitButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+        {
+            App.Current.Exit();
         }
     }
 }

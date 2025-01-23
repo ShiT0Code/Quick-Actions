@@ -15,14 +15,26 @@
 
         <TextBlock Text="让我们开始吧！"/>
 
-        <Button Style="{StaticResource AccentButtonStyle}"
+        <StackPanel Orientation="Horizontal" Spacing="24">
+            <Button Content="退出应用"
+                Click="ExitButton_Click">
+                <Button.KeyboardAccelerators>
+                    <KeyboardAccelerator Key="Left" Modifiers="Menu"/>
+                    <KeyboardAccelerator Key="Up" Modifiers="Menu"/>
+                    <KeyboardAccelerator Key="PageUp"/>
+                </Button.KeyboardAccelerators>
+            </Button>
+
+            <Button Style="{StaticResource AccentButtonStyle}"
                 Content="下一页"
                 Click="NextButton_Click">
                 <Button.KeyboardAccelerators>
                     <KeyboardAccelerator Key="Right" Modifiers="Menu"/>
                     <KeyboardAccelerator Key="Down" Modifiers="Menu"/>
                     <KeyboardAccelerator Key="PageDown"/>
-            </Button.KeyboardAccelerators>
-        </Button>
+                </Button.KeyboardAccelerators>
+            </Button>
+        </StackPanel>
+
     </StackPanel>
 </Page>

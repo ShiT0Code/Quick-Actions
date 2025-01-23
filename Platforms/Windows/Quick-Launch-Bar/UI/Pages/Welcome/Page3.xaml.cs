@@ -19,6 +19,11 @@ namespace Quick_Launch_Bar.UI.Pages.Welcome
         private void NextButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
         {
             Frame.Navigate(typeof(Page4), null, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+
+
+            var setting = new SettingsManager();
+            //bool a = setting.Welcomed();
+            setting.SaveBoolSetting("IsWelcomed", true);
         }
 
         private void BackButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)

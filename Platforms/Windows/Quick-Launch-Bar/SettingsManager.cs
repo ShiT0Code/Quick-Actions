@@ -1,39 +1,36 @@
-﻿using Microsoft.Windows.AppNotifications;
-using Microsoft.Windows.AppNotifications.Builder;
-using System;
+﻿using System;
 
 namespace Quick_Launch_Bar
 {
     class SettingsManager
     {
-        Windows.Storage.ApplicationDataContainer localSettings;
-        Windows.Storage.StorageFolder localFolder;
+        Windows.Storage.ApplicationDataContainer localSettings =
+            Windows.Storage.ApplicationData.Current.LocalSettings;
 
-        public SettingsManager()
+        Windows.Storage.StorageFolder localFolder =
+            Windows.Storage.ApplicationData.Current.LocalFolder;
+
+        Windows.Storage.ApplicationDataCompositeValue composite =
+            new Windows.Storage.ApplicationDataCompositeValue();
+
+
+        public bool SaveBoolSetting(string name, bool value)
         {
-            localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
-            localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
+            localSettings.Values[name] = value;
+
+            return true;
         }
 
-        public bool IsWelcome()
+        public bool CheckBoolSetting(string name)
         {
-            Object value = localSettings.Values["IsWelcomed"];
-            if (value == null)
-                value = "false";
+            Object value = localSettings.Values[name];
 
-            if (value.ToString() != "true")
+            if (value == null)
                 return false;
 
-            return true;
-        }
+            bool result = (bool)value;
 
-        public bool Welcomed()
-        {
-            localSettings.Values["IsWelcomed"] = "true";
-
-            Object value = localSettings.Values["IsWelcomed"];
-
-            return true;
+            return result;
         }
     }
 }

@@ -1,10 +1,6 @@
-using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Media.Animation;
-using Microsoft.Windows.AppNotifications.Builder;
-using Microsoft.Windows.AppNotifications;
 using System;
-using System.Threading.Tasks;
+using Windows.System;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -21,13 +17,15 @@ namespace Quick_Launch_Bar.UI.Pages.Welcome
             this.InitializeComponent();
         }
 
-        private void NextButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+        private async void NextButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
         {
-            var next = new SettingsWindow();
-            next.Activate();
+            var setting = new SettingsManager();
+            setting.SaveBoolSetting("IsWelcomed", true);
 
-            var setting=new SettingsManager();
-            bool a = setting.Welcomed();
+            await Launcher.LaunchUriAsync(new Uri("shi-qlb:"));
+
+            // 关闭当前应用
+            App.Current.Exit();
         }
 
         private void BackButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)

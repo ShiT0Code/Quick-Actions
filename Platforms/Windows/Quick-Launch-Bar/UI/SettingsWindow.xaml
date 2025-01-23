@@ -12,28 +12,39 @@
     <Window.SystemBackdrop>
         <MicaBackdrop/>
     </Window.SystemBackdrop>
-
-    <Grid>
-        <NavigationView PaneDisplayMode="Top"
+    
+    <NavigationView PaneDisplayMode="Top"
                         IsBackButtonVisible="Collapsed"
                         IsSettingsVisible="False"
                         Loaded="NavigationView_Loaded"
                         x:Name="Nav"
-                        SelectionChanged="Nav_SelectionChanged">
-            <NavigationView.PaneHeader>
-                <StackPanel Orientation="Horizontal"
-                            Padding="8">
-                    <TextBlock Text="快速启动栏 设置"
-                               VerticalAlignment="Center"/>
-                </StackPanel>
-            </NavigationView.PaneHeader>
-            
-            <NavigationView.MenuItems>
-                <NavigationViewItem Content="状态" Tag="DashBoard"/>
-                <NavigationViewItem Content="关于" Tag="About"/>
-            </NavigationView.MenuItems>
+                        SelectionChanged="Nav_SelectionChanged"
+                        AlwaysShowHeader="True">
 
-            <Frame x:Name="ContentFrame"/>
-        </NavigationView>
-    </Grid>
+        <NavigationView.Header>
+            <TextBlock x:Name="HeaderText"
+                       Style="{StaticResource TitleTextBlockStyle}"
+                       FontWeight="Bold"/>
+        </NavigationView.Header>
+        
+        <NavigationView.PaneHeader>
+            <StackPanel Orientation="Horizontal"
+                            Padding="8">
+                <TextBlock Text="快速启动栏 设置"
+                               VerticalAlignment="Center"/>
+            </StackPanel>
+        </NavigationView.PaneHeader>
+
+        <NavigationView.MenuItems>
+            <NavigationViewItem Content="仪表板" Tag="DashBoard"/>
+            <NavigationViewItem Content="侧边栏设置" Tag="SideBar"/>
+            <!--NavigationViewItem Content="控制中心快捷方式" Tag="CC"/-->
+            <NavigationViewItem Content="关于" Tag="About"/>
+        </NavigationView.MenuItems>
+
+        <ScrollViewer>
+            <Frame x:Name="ContentFrame" Padding="28" Navigating="ContentFrame_Navigating"/>
+        </ScrollViewer>
+    </NavigationView>
+
 </Window>

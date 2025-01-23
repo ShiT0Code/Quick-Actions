@@ -26,13 +26,16 @@ namespace Quick_Launch_Bar
         /// <param name="args">Details about the launch request and process.</param>
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
-            m_window = new WelcomeWindow();
-
             var IsPassed = new SettingsManager();
-            bool Passed=IsPassed.IsWelcome();
+            bool Passed = IsPassed.CheckBoolSetting("IsWelcomed");
+            bool IsInitialize = IsPassed.CheckBoolSetting("IsInitialize");
 
-            if (Passed)
-                m_window=new SettingsWindow();
+            if (!Passed)
+                m_window = new WelcomeWindow();
+            else if(!IsInitialize)
+                m_window = new SettingsWindow();
+            else
+                m_window = new SettingsWindow();
 
             m_window.Activate();
         }

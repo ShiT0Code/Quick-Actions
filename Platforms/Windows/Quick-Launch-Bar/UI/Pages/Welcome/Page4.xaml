@@ -13,6 +13,8 @@
                    Style="{StaticResource TitleTextBlockStyle}"
                    FontWeight="Bold"/>
 
+        <TextBlock Text="你已经可以开始了！"/>
+
         <StackPanel Orientation="Horizontal" Spacing="24">
             <Button Content="上一页"
                     Click="BackButton_Click">
