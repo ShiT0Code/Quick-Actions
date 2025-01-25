@@ -19,11 +19,13 @@ namespace Quick_Launch_Bar.UI.Pages.Settings
             this.InitializeComponent();
 
             SwitchViewModel = new SwitchViewModel();
-            ViewModels = new SiderBarItemsViewModels();
+
+            viewModel = new SideBarSettingsViewModel();
         }
 
+        public SideBarSettingsViewModel viewModel { get; set; }
+
         public SwitchViewModel SwitchViewModel { get; set; }
-        public SiderBarItemsViewModels ViewModels { get; set; }
 
         private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
         {
@@ -31,89 +33,93 @@ namespace Quick_Launch_Bar.UI.Pages.Settings
             setting.SaveBoolSetting("IsSideBarOn", Tog.IsOn);
         }
 
-        private async void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var frame = new Frame();
-            frame.Navigate(typeof(SideBarAddAction));
-
-            ContentDialog Dialog = new ContentDialog()
-            {
-                XamlRoot = this.XamlRoot,
-                Title = "修改操作、快捷方式",
-                Content = frame,
-                CloseButtonText = "取消",
-                PrimaryButtonText = "保存",
-                DefaultButton = ContentDialogButton.Primary,
-                MinWidth = 500
-            };
-
-            await Dialog.ShowAsync();
         }
 
-        private async void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            var frame=new Frame();
-            frame.Navigate(typeof(SideBarAddAction));
-
-            ContentDialog Dialog = new ContentDialog()
-            {
-                XamlRoot = this.XamlRoot,
-                Title = "添加操作、快捷方式",
-                Content = frame,
-                CloseButtonText = "取消",
-                PrimaryButtonText = "添加",
-                DefaultButton = ContentDialogButton.Primary,
-                MinWidth = 500
-            };
-
-            await Dialog.ShowAsync();
-        }
-
-        private void ItemsView_SelectionChanged(ItemsView sender, ItemsViewSelectionChangedEventArgs args)
-        {
-            EditButton.IsEnabled= true;
 
         }
     }
 
 
-
-
-    public class SiderBarItems
+    public class SideBarItem
     {
         public string Name { get; set; } = "";
         public string Description { get; set; } = "";
-        public bool IsEnable { get; set; } = false;
-        public int Style { get; set; } = 0;
-        public string IconPath { get; set; } = "";
-
-        //public string ActionName1 { get; set; } = "";
-        //public string ActionDo1 { get; set; } = "";
-
-        //public string ActionName2 { get; set; } = "";
-        //public string ActionDo2 { get; set; } = "";
-
-        //public string ActionName3 { get; set; } = "";
-        //public string ActionDo3 { get; set; } = "";
-
-        //public string ActionName4 { get; set; } = "";
-        //public string ActionDo4 { get; set; } = "";
-
-        //public string ActionName5 { get; set; } = "";
-        //public string ActionDo5 { get; set; } = "";
+        public string Icon { get; set; } = "";
+        public int Style { get; set; }
+        public bool IsEnable { get; set; }
+        public List<SideBarItemAction> Actions { get; set; } =
+            new List<SideBarItemAction>();
     }
 
-    public class SiderBarItemsViewModels
+    public class SideBarItemAction
     {
-        private ObservableCollection<SiderBarItems> items=new ObservableCollection<SiderBarItems>();
-        public ObservableCollection<SiderBarItems> Items { get { return items; } }
+        public string Title { get; set; } = "";
+        public string Description { get; set; } = "";
+        public string Action { get; set; } = "";
+        public bool IsEnable { get; set; }
+        public string Icon { get; set; } = "";
+    }
 
-        public SiderBarItemsViewModels() 
+    public class SideBarSettingsViewModel
+    {
+        public List<SideBarItem> Items { get; set; }
+
+        public SideBarSettingsViewModel() 
         {
-            items.Add(new SiderBarItems() { Name="Name", IsEnable=true, Description="No.", Style=0, IconPath=""});
-            items.Add(new SiderBarItems() { Name = "Name1", IsEnable = true, Description = "Yes.", Style = 1, IconPath = "" });
-            items.Add(new SiderBarItems() { Name = "Name3", IsEnable = true, Description = "Yes.", Style = 2, IconPath = "" });
+            Items = new List<SideBarItem>
+            {
+                new SideBarItem
+                {
+                    Name="1",
+                    Description="No.",
+                    Icon="",
+                    Style=0,
+                    IsEnable=true,
+                    Actions=new List<SideBarItemAction>()
+                    {
+                        new SideBarItemAction
+                        {
+                            Title="Tit",
+                            Description="Yes.",
+                            Icon="",
+                            IsEnable=true,
+                            Action=""
+                        }
+                    }
+                },
+                                new SideBarItem
+                {
+                    Name="2",
+                    Description="Yes.",
+                    Icon="",
+                    Style=1,
+                    IsEnable=false,
+                    Actions=new List<SideBarItemAction>()
+                    {
+                        new SideBarItemAction
+                        {
+                            Title="1999",
+                            Description="Yes.",
+                            Icon="",
+                            IsEnable=true,
+                            Action=""
+                        },
+                        new SideBarItemAction
+                        {
+                            Title="4999",
+                            Description="15",
+                            Icon="",
+                            IsEnable=false,
+                            Action=""
+                        }
+                    }
+                }
 
+            };
         }
     }
 }

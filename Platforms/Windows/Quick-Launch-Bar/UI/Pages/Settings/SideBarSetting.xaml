@@ -101,27 +101,92 @@
                           MinHeight="300"
                           CornerRadius="8"
                           Padding="12">
-                        <ItemsView SelectionMode="Single"
-                            ItemsSource="{x:Bind ViewModels.Items}"
-                            SelectionChanged="ItemsView_SelectionChanged">
-                            
+                        <ItemsView ItemsSource="{x:Bind viewModel.Items}">
                             <ItemsView.Layout>
-                                <UniformGridLayout MinColumnSpacing="20"/>
+                                <UniformGridLayout MinItemWidth="320"
+                                                   MinItemHeight="150"
+                                                   MinColumnSpacing="12"/>
                             </ItemsView.Layout>
-                            
                             <ItemsView.ItemTemplate>
-                                <DataTemplate x:DataType="local:SiderBarItems">
-                                    <ItemContainer>
-                                        <Grid Padding="8"
-                                              Height="100"
-                                              Width="100"
-                                              ToolTipService.ToolTip="{x:Bind Description}">
-                                            <StackPanel>
-                                                
-                                                <TextBlock Text="{x:Bind Name}"
-                                                           HorizontalAlignment="Center"
-                                                           VerticalAlignment="Bottom"/>
-                                            </StackPanel>
+                                <DataTemplate x:DataType="local:SideBarItem">
+                                    <ItemContainer ToolTipService.ToolTip="{x:Bind Description}">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="128"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Image Width="100"
+                                                   Height="100"
+                                                   Grid.RowSpan="2"/>
+
+                                            <TextBlock Text="{x:Bind Name}"
+                                                       Grid.Row="2"
+                                                       HorizontalAlignment="Center"/>
+                                            
+                                            <ToggleSwitch IsOn="{x:Bind IsEnable}"
+                                                          Grid.Column="1"
+                                                          OnContent="已启用"
+                                                          OffContent="已禁用"/>
+
+                                            <Button Content="点击查看描述"
+                                                    Grid.Row="2"
+                                                    Grid.Column="1">
+                                                <Button.Flyout>
+                                                    <Flyout>
+                                                        <TextBlock Text="{x:Bind Description}"/>
+                                                    </Flyout>
+                                                </Button.Flyout>
+                                            </Button>
+
+                                            <Button Content="查看可进行的操作"
+                                                    Grid.Row="1"
+                                                    Grid.Column="1">
+                                                <Button.Flyout>
+                                                    <Flyout>
+                                                        <ItemsView ItemsSource="{x:Bind Actions}">
+                                                            <ItemsView.Layout>
+                                                                <LinedFlowLayout LineHeight="48"
+                                                                                 LineSpacing="4"
+                                                                                 ItemsStretch="Fill"
+                                                                                 MinItemSpacing="2"/>
+                                                            </ItemsView.Layout>
+                                                            <ItemsView.ItemTemplate>
+                                                                <DataTemplate x:DataType="local:SideBarItemAction">
+                                                                    <ItemContainer ToolTipService.ToolTip="{x:Bind Description}">
+                                                                        <Grid>
+                                                                            <Grid.ColumnDefinitions>
+                                                                                <ColumnDefinition Width="28"/>
+                                                                                <ColumnDefinition Width="Auto"/>
+                                                                                <ColumnDefinition Width="Auto"/>
+                                                                            </Grid.ColumnDefinitions>
+
+                                                                            <Grid.RowDefinitions>
+                                                                                <RowDefinition Height="Auto"/>
+                                                                                <RowDefinition Height="Auto"/>
+                                                                                <RowDefinition Height="Auto"/>
+                                                                            </Grid.RowDefinitions>
+
+                                                                            <TextBlock Text="{x:Bind Title}"/>
+
+                                                                            <TextBlock Grid.Row="1">
+                                                                                <Run Text="描述："/>
+                                                                                <Run Text="{x:Bind Description}"/>
+                                                                            </TextBlock>
+                                                                        </Grid>
+                                                                    </ItemContainer>
+                                                                </DataTemplate>
+                                                            </ItemsView.ItemTemplate>
+                                                        </ItemsView>
+                                                    </Flyout>
+                                                </Button.Flyout>
+                                            </Button>
                                         </Grid>
                                     </ItemContainer>
                                 </DataTemplate>
