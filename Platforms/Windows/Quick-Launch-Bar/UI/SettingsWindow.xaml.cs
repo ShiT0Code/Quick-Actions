@@ -45,9 +45,6 @@ namespace Quick_Launch_Bar.UI
                 case "SideBar":
                     ContentFrame.Navigate(typeof(SideBarSetting), null, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
                     break;
-                case "CC":
-                    ContentFrame.Navigate(typeof(ContorlCSetting), null, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
-                    break;
             }
 
             Index = -1;
@@ -57,6 +54,11 @@ namespace Quick_Launch_Bar.UI
         {
             if (Index != -1)
                 Nav.SelectedItem = Nav.MenuItems[Index];
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            new ExitingWarning().Activate();
         }
     }
 }

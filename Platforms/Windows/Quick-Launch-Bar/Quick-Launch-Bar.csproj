@@ -13,16 +13,29 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Assets\AppIcon\BadgeLogo.scale-100.png" />
+    <None Remove="Assets\AppIcon\BadgeLogo.scale-125.png" />
+    <None Remove="Assets\AppIcon\BadgeLogo.scale-150.png" />
+    <None Remove="Assets\AppIcon\BadgeLogo.scale-200.png" />
+    <None Remove="Assets\AppIcon\BadgeLogo.scale-400.png" />
+    <None Remove="Assets\AppIcon\StoreLogo.scale-100.png" />
+    <None Remove="Assets\AppIcon\StoreLogo.scale-125.png" />
+    <None Remove="Assets\AppIcon\StoreLogo.scale-150.png" />
+    <None Remove="Assets\AppIcon\StoreLogo.scale-200.png" />
+    <None Remove="Assets\AppIcon\StoreLogo.scale-400.png" />
+    <None Remove="UI\ExitingWarning.xaml" />
     <None Remove="UI\Pages\Settings\About.xaml" />
-    <None Remove="UI\Pages\Settings\ContorlCSetting.xaml" />
     <None Remove="UI\Pages\Settings\DashBoard.xaml" />
+    <None Remove="UI\Pages\Settings\SideBarEditAction.xaml" />
     <None Remove="UI\Pages\Settings\SideBarSetting.xaml" />
     <None Remove="UI\Pages\Welcome\Page1.xaml" />
     <None Remove="UI\Pages\Welcome\Page2.xaml" />
     <None Remove="UI\Pages\Welcome\Page3.xaml" />
     <None Remove="UI\Pages\Welcome\Page4.xaml" />
     <None Remove="UI\SettingsWindow.xaml" />
+    <None Remove="UI\SideBarWindow.xaml" />
     <None Remove="UI\WelcomeWindow.xaml" />
+    <None Remove="UI_Styles.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -50,9 +63,25 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.1742" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.6.250108002" />
+    <PackageReference Include="WinUIEx" Version="2.5.1" />
   </ItemGroup>
   <ItemGroup>
-    <Page Update="UI\Pages\Settings\ContorlCSetting.xaml">
+    <Page Update="UI\ExitingWarning.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="UI_Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="UI\SideBarWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="UI\Pages\Settings\SideBarEditAction.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
@@ -120,13 +149,14 @@
     <DefaultLanguage>zh-hans-cn</DefaultLanguage>
     <PackageCertificateThumbprint>06DC9FBFF114566B2CC15A7A493A998D09D142E8</PackageCertificateThumbprint>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
-    <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
+    <GenerateAppInstallerFile>True</GenerateAppInstallerFile>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
-    <AppxSymbolPackageEnabled>True</AppxSymbolPackageEnabled>
+    <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
     <AppxBundle>Never</AppxBundle>
-    <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
+    <HoursBetweenUpdateChecks>432</HoursBetweenUpdateChecks>
     <AppxPackageDir>C:\Users\hbeau\Desktop\</AppxPackageDir>
+    <AppInstallerUri>https://ghproxy.cn/https://github.com/ShiT0Code/Quick-Launch-Bar/releases/download/Latest/Quick-Launch-Bar_Latest_x86.msix</AppInstallerUri>
   </PropertyGroup>
 </Project>

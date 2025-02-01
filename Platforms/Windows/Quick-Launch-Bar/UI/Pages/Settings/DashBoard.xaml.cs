@@ -1,7 +1,6 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Animation;
-using System.Diagnostics;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -32,18 +31,11 @@ namespace Quick_Launch_Bar.UI.Pages.Settings
         {
             var setting = new SettingsManager();
             setting.SaveBoolSetting("IsSideBarOn", SiTo.IsOn);
-        }
 
-        private void ConTo_Toggled(object sender, RoutedEventArgs e)
-        {
-            var setting = new SettingsManager();
-            //setting.SaveBoolSetting("IsControlCOn", Tog.IsOn);
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            SettingsWindow.Index = 2;
-            Frame.Navigate(typeof(ContorlCSetting), null, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+            if (SiTo.IsOn && !new SettingsManager().CheckBoolSetting("IsSideBarLaunched"))
+            {
+                new SideBarWindow().Activate();
+            }
         }
     }
 

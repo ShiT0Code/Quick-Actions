@@ -19,7 +19,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="90"/>
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
@@ -35,8 +35,8 @@
                        Grid.Row="1"
                        Style="{StaticResource CaptionTextBlockStyle}"/>
 
-            <ToggleSwitch OnContent=""
-                          OffContent=""
+            <ToggleSwitch OnContent="启用"
+                          OffContent="禁用"
                           Grid.Column="2"
                           Grid.RowSpan="2"
                           VerticalAlignment="Center"
@@ -61,6 +61,11 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
                     <TextBlock Text="固定的应用、操作"
                         VerticalAlignment="Center"/>
                 </Grid>
@@ -74,7 +79,7 @@
                     </Grid.RowDefinitions>
                     <StackPanel Orientation="Horizontal"
                                 Spacing="18">
-                        <Button Click="Button_Click"
+                        <Button Click="EditButton_Click"
                                 IsEnabled="False"
                                 x:Name="EditButton">
                             <StackPanel Orientation="Horizontal"
@@ -85,7 +90,7 @@
                         </Button>
 
                         <Button Style="{StaticResource AccentButtonStyle}"
-                                Click="Button_Click_1">
+                                Click="AddButton_Click">
                             <StackPanel Orientation="Horizontal"
                                         Spacing="8">
                                 <FontIcon Glyph="&#xE710;" />
@@ -101,7 +106,8 @@
                           MinHeight="300"
                           CornerRadius="8"
                           Padding="12">
-                        <ItemsView ItemsSource="{x:Bind viewModel.Items}">
+                        <ItemsView ItemsSource="{x:Bind viewModel.Items}"
+                                   SelectionChanged="ItemsView_SelectionChanged">
                             <ItemsView.Layout>
                                 <UniformGridLayout MinItemWidth="320"
                                                    MinItemHeight="150"
@@ -133,7 +139,8 @@
                                             <ToggleSwitch IsOn="{x:Bind IsEnable}"
                                                           Grid.Column="1"
                                                           OnContent="已启用"
-                                                          OffContent="已禁用"/>
+                                                          OffContent="已禁用"
+                                                          Toggled="ToggleSwitch_Toggled_Item"/>
 
                                             <Button Content="点击查看描述"
                                                     Grid.Row="2"
@@ -150,19 +157,13 @@
                                                     Grid.Column="1">
                                                 <Button.Flyout>
                                                     <Flyout>
-                                                        <ItemsView ItemsSource="{x:Bind Actions}">
-                                                            <ItemsView.Layout>
-                                                                <LinedFlowLayout LineHeight="48"
-                                                                                 LineSpacing="4"
-                                                                                 ItemsStretch="Fill"
-                                                                                 MinItemSpacing="2"/>
-                                                            </ItemsView.Layout>
-                                                            <ItemsView.ItemTemplate>
+                                                        <ItemsControl ItemsSource="{x:Bind Actions}">
+                                                            <ItemsControl.ItemTemplate>
                                                                 <DataTemplate x:DataType="local:SideBarItemAction">
                                                                     <ItemContainer ToolTipService.ToolTip="{x:Bind Description}">
                                                                         <Grid>
                                                                             <Grid.ColumnDefinitions>
-                                                                                <ColumnDefinition Width="28"/>
+                                                                                <ColumnDefinition Width="100"/>
                                                                                 <ColumnDefinition Width="Auto"/>
                                                                                 <ColumnDefinition Width="Auto"/>
                                                                             </Grid.ColumnDefinitions>
@@ -182,8 +183,8 @@
                                                                         </Grid>
                                                                     </ItemContainer>
                                                                 </DataTemplate>
-                                                            </ItemsView.ItemTemplate>
-                                                        </ItemsView>
+                                                            </ItemsControl.ItemTemplate>
+                                                        </ItemsControl>
                                                     </Flyout>
                                                 </Button.Flyout>
                                             </Button>
@@ -194,6 +195,42 @@
                         </ItemsView>
                     </Grid>
                 </Grid>
+            </Expander.Content>
+        </Expander>
+
+        <Expander>
+            <Expander.Resources>
+                <Style TargetType="Expander">
+                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </Expander.Resources>
+
+            <Expander.Header>
+                <Grid Padding="18">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="排除的应用"
+                        VerticalAlignment="Center"/>
+
+                    <TextBlock Text="将不会在以下应用中启用全局侧边栏"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource CaptionTextBlockStyle}"
+                        Grid.Row="1"/>
+                </Grid>
+            </Expander.Header>
+
+            <Expander.Content>
+                AAAA
             </Expander.Content>
         </Expander>
     </StackPanel>

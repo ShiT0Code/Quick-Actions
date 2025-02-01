@@ -1,8 +1,6 @@
 using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Animation;
 using Quick_Launch_Bar.UI.Pages.Welcome;
-using System;
 using Windows.Graphics;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -28,7 +26,7 @@ namespace Quick_Launch_Bar.UI
 
         private void Content_Loaded(object sender, RoutedEventArgs e)
         {
-            Content.Navigate(typeof(Page1), null, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+            WelcomeWindowContent.Navigate(typeof(Page1), null, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
     }
 }

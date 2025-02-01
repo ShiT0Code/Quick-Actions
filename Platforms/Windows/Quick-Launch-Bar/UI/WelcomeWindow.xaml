@@ -23,7 +23,7 @@
             <TextBlock Text="欢迎" VerticalAlignment="Center"/>
         </StackPanel>
         
-        <Frame x:Name="Content"
+        <Frame x:Name="WelcomeWindowContent"
                Loaded="Content_Loaded"
                Grid.Row="1"
                Padding="24"/>

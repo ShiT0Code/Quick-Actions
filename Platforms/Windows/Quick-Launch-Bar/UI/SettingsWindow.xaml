@@ -22,9 +22,23 @@
                         AlwaysShowHeader="True">
 
         <NavigationView.Header>
-            <TextBlock x:Name="HeaderText"
-                       Style="{StaticResource TitleTextBlockStyle}"
-                       FontWeight="Bold"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                
+                <TextBlock x:Name="HeaderText"
+                   Style="{StaticResource TitleTextBlockStyle}"
+                   FontWeight="Bold"/>
+
+                <Button Style="{StaticResource ButtonWithoutBorBac}"
+                        Click="Button_Click"
+                        Content="退出应用"
+                        FontSize="24"
+                        Grid.Column="2"/>
+            </Grid>
         </NavigationView.Header>
         
         <NavigationView.PaneHeader>
@@ -38,7 +52,6 @@
         <NavigationView.MenuItems>
             <NavigationViewItem Content="仪表板" Tag="DashBoard"/>
             <NavigationViewItem Content="侧边栏设置" Tag="SideBar"/>
-            <!--NavigationViewItem Content="控制中心快捷方式" Tag="CC"/-->
             <NavigationViewItem Content="关于" Tag="About"/>
         </NavigationView.MenuItems>
 
