@@ -36,20 +36,13 @@ namespace Quick_Launch_Bar.UI
                 Content = "真的要退出应用 快速启动栏 吗？\n" +
                 "你可以重新打开它",
                 CloseButtonText = "取消",
-                PrimaryButtonText = "重启应用",
-                SecondaryButtonText = "确定退出",
+                PrimaryButtonText = "确定退出",
                 DefaultButton = ContentDialogButton.Close
             };
 
             ContentDialogResult result = await dialog.ShowAsync();
 
             if (result == ContentDialogResult.Primary)
-            {
-                this.Close();
-                await Launcher.LaunchUriAsync(new Uri("shi-qlb://none"));
-                App.Current.Exit();
-            }
-            else if (result == ContentDialogResult.Secondary)
             {
                 this.Close();
                 App.Current.Exit();

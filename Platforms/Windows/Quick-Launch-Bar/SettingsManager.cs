@@ -4,15 +4,10 @@ namespace Quick_Launch_Bar
 {
     class SettingsManager
     {
-        Windows.Storage.ApplicationDataContainer localSettings =
+        private readonly Windows.Storage.ApplicationDataContainer localSettings =
             Windows.Storage.ApplicationData.Current.LocalSettings;
 
-        Windows.Storage.StorageFolder localFolder =
-            Windows.Storage.ApplicationData.Current.LocalFolder;
-
-        Windows.Storage.ApplicationDataCompositeValue composite =
-            new Windows.Storage.ApplicationDataCompositeValue();
-
+        //private static readonly string SettingsFolder ="JSON";
 
         public bool SaveBoolSetting(string name, bool value)
         {

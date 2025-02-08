@@ -31,11 +31,6 @@ namespace Quick_Launch_Bar.UI.Pages.Settings
         {
             var setting = new SettingsManager();
             setting.SaveBoolSetting("IsSideBarOn", SiTo.IsOn);
-
-            if (SiTo.IsOn && !new SettingsManager().CheckBoolSetting("IsSideBarLaunched"))
-            {
-                new SideBarWindow().Activate();
-            }
         }
     }
 

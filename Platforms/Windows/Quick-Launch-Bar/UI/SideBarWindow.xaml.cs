@@ -32,7 +32,13 @@ namespace Quick_Launch_Bar.UI
             this.SystemBackdrop = new WinUIEx.TransparentTintBackdrop();
             
             this.AppWindow.IsShownInSwitchers = false;
+        }
 
+        bool IsLeft = true;
+        double scFa = 1;
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        {
+            // 设置窗口
             this.AppWindow.SetPresenter(Microsoft.UI.Windowing.AppWindowPresenterKind.Overlapped);
 
             var over_Presenter = this.AppWindow.Presenter as OverlappedPresenter;
@@ -44,14 +50,6 @@ namespace Quick_Launch_Bar.UI
                 over_Presenter.IsResizable = false;
             }
 
-            //this.SetTitleBar(NButton);
-        }
-
-        bool IsLeft = true;
-        int WinWide = 136;
-        double scFa = 1;
-        private void Grid_Loaded(object sender, RoutedEventArgs e)
-        {
             // 获取当前窗口的句柄
             IntPtr hWnd = WindowNative.GetWindowHandle(this);
 
@@ -63,7 +61,6 @@ namespace Quick_Launch_Bar.UI
             scFa = scalingFactor;
 
             this.AppWindow.Resize(new Windows.Graphics.SizeInt32((int)(136 * scalingFactor), (int)(96 * scalingFactor)));
-            WinWide = (int)(136 * scalingFactor);
 
             // 禁用 Windows 11 的圆角效果
             int attribute = 33; // DWMWA_WINDOW_CORNER_PREFERENCE
@@ -89,7 +86,6 @@ namespace Quick_Launch_Bar.UI
             int screenHeight = monitorInfo.rcMonitor.Bottom - monitorInfo.rcMonitor.Top;
 
             // 输出显示器信息
-            //$"显示器宽度: {screenWidth}, 显示器高度: {screenHeight}, 显示器缩放比例: {scalingFactor}%（已除以 100）"
             float PerceOfHe = 1;
             float PerceOfWi = 1;
 
@@ -170,11 +166,6 @@ namespace Quick_Launch_Bar.UI
 
 
         // 处理事件
-        //private void ShapeButton_PointerPressed(object sender, Microsoft.UI.Xaml.Input.PointerRoutedEventArgs e)
-        //{
-        //    //FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
-        //    PressedShapeButton();
-        //}
 
         private void ShapeButton_SizeChanged(object sender, SizeChangedEventArgs e)
         {
@@ -254,13 +245,6 @@ namespace Quick_Launch_Bar.UI
             await Launcher.LaunchUriAsync(new Uri("shi-qlb://settings/sidebar/edit"));
         }
 
-        private async void Reboot_Button_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-            await Launcher.LaunchUriAsync(new Uri("shi-qlb://none"));
-            App.Current.Exit();
-        }
-
         private void Exit_Button_Click(object sender, RoutedEventArgs e)
         {
             new ExitingWarning().Activate();
@@ -268,22 +252,24 @@ namespace Quick_Launch_Bar.UI
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            SetUpApp("C:\\Program Files\\Seewo\\MiniApps\\LuckyRandom\\LuckyRandom.exe", "随机抽选");
+            SetUpApp("C:\\Program Files\\Seewo\\MiniApps\\LuckyRandom\\LuckyRandom.exe", "随机抽选", false);
+            SetUpApp("C:\\Program Files\\Seewo\\MiniApps\\LuckyRandom\\LuckyRandom.exe", "随机抽选", true);
         }
 
         private void TimerButton(object sender, RoutedEventArgs e)
         {
-            SetUpApp("C:\\Program Files\\Seewo\\MiniApps\\DesktopTimer\\DesktopTimer.exe", "希沃计时器");
+            SetUpApp("C:\\Program Files\\Seewo\\MiniApps\\DesktopTimer\\DesktopTimer.exe", "希沃计时器", true);
         }
 
         private void RollCall_Button_Click(object sender, RoutedEventArgs e)
         {
-            SetUpApp("C:\\Program Files\\Seewo\\MiniApps\\RollCall\\RollCall.exe", "人数统计");
+            SetUpApp("C:\\Program Files\\Seewo\\MiniApps\\RollCall\\RollCall.exe", "人数统计", false);
+            SetUpApp("C:\\Program Files\\Seewo\\MiniApps\\RollCall\\RollCall.exe", "人数统计", true);
         }
 
         private void Button1_Click(object sender, RoutedEventArgs e)
         {
-            SetUpApp("C:\\Program Files\\Seewo\\MiniApps\\DesktopAnnotation\\DesktopAnnotation.exe", "桌面批注");
+            SetUpApp("C:\\Program Files\\Seewo\\MiniApps\\DesktopAnnotation\\DesktopAnnotation.exe", "桌面批注", true);
         }
         private async void Button_Click_2(object sender, RoutedEventArgs e)
         {
@@ -295,21 +281,21 @@ namespace Quick_Launch_Bar.UI
 
         private void Button2_Click(object sender, RoutedEventArgs e)
         {
-            SetUpApp("C:\\Program Files\\Seewo\\MiniApps\\DesktopCalendar\\DesktopCalendar.exe", "希沃日历");
+            SetUpApp("C:\\Program Files\\Seewo\\MiniApps\\DesktopCalendar\\DesktopCalendar.exe", "希沃日历", true);
         }
 
         private void Button3_Click(object sender, RoutedEventArgs e)
         {
-            SetUpApp("C:\\Program Files\\Seewo\\MiniApps\\DesktopMagnifier\\DesktopMagnifier.exe", "希沃放大镜");
+            SetUpApp("C:\\Program Files\\Seewo\\MiniApps\\DesktopMagnifier\\DesktopMagnifier.exe", "希沃放大镜",true);
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            SetUpApp("C:\\Program Files\\Seewo\\MiniApps\\DesktopScreenshot\\DesktopScreenshot.exe", "希沃截图");
+            SetUpApp("C:\\Program Files\\Seewo\\MiniApps\\DesktopScreenshot\\DesktopScreenshot.exe", "希沃截图",true);
 
         }
 
-        private bool SetUpApp(string executablePath, string Title)
+        private void SetUpApp(string executablePath, string Title,bool IsShow)
         {
             bool Result = true;
             string error = "";
@@ -335,9 +321,8 @@ namespace Quick_Launch_Bar.UI
                 Notif.AddText($"失败原因：{error}");
             }
 
-            AppNotificationManager.Default.Show(Notif.BuildNotification());
-
-            return Result;
+            if(IsShow)
+                AppNotificationManager.Default.Show(Notif.BuildNotification());
         }
 
 
@@ -358,6 +343,11 @@ namespace Quick_Launch_Bar.UI
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
             flyout.Hide();
+        }
+
+        private void MoreHyperlinkButton_Click(object sender, RoutedEventArgs e)
+        {
+            FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
         }
     }
 }

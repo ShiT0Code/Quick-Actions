@@ -41,163 +41,10 @@
                           Grid.RowSpan="2"
                           VerticalAlignment="Center"
                           IsOn="{x:Bind SwitchViewModel.DefaultSettings.SideBar}"
-                          Toggled="ToggleSwitch_Toggled"
+                          Toggled="IsEnable_ToggleSwitch_Toggled"
                           x:Name="Tog"/>
         </Grid>
-
-        <Expander>
-            <Expander.Resources>
-                <Style TargetType="Expander">
-                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                </Style>
-            </Expander.Resources>
-
-            <Expander.Header>
-                <Grid Padding="18">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-
-                    <TextBlock Text="固定的应用、操作"
-                        VerticalAlignment="Center"/>
-                </Grid>
-            </Expander.Header>
-
-            <Expander.Content>
-                <Grid RowSpacing="16">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <StackPanel Orientation="Horizontal"
-                                Spacing="18">
-                        <Button Click="EditButton_Click"
-                                IsEnabled="False"
-                                x:Name="EditButton">
-                            <StackPanel Orientation="Horizontal"
-                                        Spacing="8">
-                                <FontIcon Glyph="&#xE70F;" />
-                                <TextBlock Text="选择一个以编辑"/>
-                            </StackPanel>
-                        </Button>
-
-                        <Button Style="{StaticResource AccentButtonStyle}"
-                                Click="AddButton_Click">
-                            <StackPanel Orientation="Horizontal"
-                                        Spacing="8">
-                                <FontIcon Glyph="&#xE710;" />
-                                <TextBlock Text="添加"/>
-                            </StackPanel>
-                        </Button>
-                    </StackPanel>
-
-                    <Grid Grid.Row="1"
-                          Background="{StaticResource LayerFillColorAltBrush}"
-                          BorderBrush="{StaticResource AppBarBorderThemeBrush}"
-                          BorderThickness="1"
-                          MinHeight="300"
-                          CornerRadius="8"
-                          Padding="12">
-                        <ItemsView ItemsSource="{x:Bind viewModel.Items}"
-                                   SelectionChanged="ItemsView_SelectionChanged">
-                            <ItemsView.Layout>
-                                <UniformGridLayout MinItemWidth="320"
-                                                   MinItemHeight="150"
-                                                   MinColumnSpacing="12"/>
-                            </ItemsView.Layout>
-                            <ItemsView.ItemTemplate>
-                                <DataTemplate x:DataType="local:SideBarItem">
-                                    <ItemContainer ToolTipService.ToolTip="{x:Bind Description}">
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto"/>
-                                                <RowDefinition Height="Auto"/>
-                                                <RowDefinition Height="Auto"/>
-                                            </Grid.RowDefinitions>
-
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="128"/>
-                                                <ColumnDefinition Width="*"/>
-                                            </Grid.ColumnDefinitions>
-
-                                            <Image Width="100"
-                                                   Height="100"
-                                                   Grid.RowSpan="2"/>
-
-                                            <TextBlock Text="{x:Bind Name}"
-                                                       Grid.Row="2"
-                                                       HorizontalAlignment="Center"/>
-                                            
-                                            <ToggleSwitch IsOn="{x:Bind IsEnable}"
-                                                          Grid.Column="1"
-                                                          OnContent="已启用"
-                                                          OffContent="已禁用"
-                                                          Toggled="ToggleSwitch_Toggled_Item"/>
-
-                                            <Button Content="点击查看描述"
-                                                    Grid.Row="2"
-                                                    Grid.Column="1">
-                                                <Button.Flyout>
-                                                    <Flyout>
-                                                        <TextBlock Text="{x:Bind Description}"/>
-                                                    </Flyout>
-                                                </Button.Flyout>
-                                            </Button>
-
-                                            <Button Content="查看可进行的操作"
-                                                    Grid.Row="1"
-                                                    Grid.Column="1">
-                                                <Button.Flyout>
-                                                    <Flyout>
-                                                        <ItemsControl ItemsSource="{x:Bind Actions}">
-                                                            <ItemsControl.ItemTemplate>
-                                                                <DataTemplate x:DataType="local:SideBarItemAction">
-                                                                    <ItemContainer ToolTipService.ToolTip="{x:Bind Description}">
-                                                                        <Grid>
-                                                                            <Grid.ColumnDefinitions>
-                                                                                <ColumnDefinition Width="100"/>
-                                                                                <ColumnDefinition Width="Auto"/>
-                                                                                <ColumnDefinition Width="Auto"/>
-                                                                            </Grid.ColumnDefinitions>
-
-                                                                            <Grid.RowDefinitions>
-                                                                                <RowDefinition Height="Auto"/>
-                                                                                <RowDefinition Height="Auto"/>
-                                                                                <RowDefinition Height="Auto"/>
-                                                                            </Grid.RowDefinitions>
-
-                                                                            <TextBlock Text="{x:Bind Title}"/>
-
-                                                                            <TextBlock Grid.Row="1">
-                                                                                <Run Text="描述："/>
-                                                                                <Run Text="{x:Bind Description}"/>
-                                                                            </TextBlock>
-                                                                        </Grid>
-                                                                    </ItemContainer>
-                                                                </DataTemplate>
-                                                            </ItemsControl.ItemTemplate>
-                                                        </ItemsControl>
-                                                    </Flyout>
-                                                </Button.Flyout>
-                                            </Button>
-                                        </Grid>
-                                    </ItemContainer>
-                                </DataTemplate>
-                            </ItemsView.ItemTemplate>
-                        </ItemsView>
-                    </Grid>
-                </Grid>
-            </Expander.Content>
-        </Expander>
-
+        
         <Expander>
             <Expander.Resources>
                 <Style TargetType="Expander">
@@ -233,5 +80,99 @@
                 AAAA
             </Expander.Content>
         </Expander>
+
+        <TextBlock Text="查看和编辑"/>
+        <Grid RowSpacing="8" ColumnSpacing="18">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*" MinHeight="200"/>
+            </Grid.RowDefinitions>
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" MinWidth="350"/>
+                <ColumnDefinition Width="Auto" MinWidth="400" MaxWidth="900"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.RowSpan="3">
+                <ListView ItemsSource="{x:Bind ViewModel.Items,Mode=OneWay}"
+                          SelectionChanged="ListView_SelectionChanged"
+                          x:Name="SideBarList">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="local:SideBarItem">
+                            <StackPanel Orientation="Horizontal"
+                                    ToolTipService.ToolTip="{x:Bind description}">
+                                <TextBlock Text="{x:Bind name}" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                
+                <HyperlinkButton Click="AddItem_HyperlinkButton_Click"
+                                 HorizontalAlignment="Stretch">
+                    <StackPanel Orientation="Horizontal">
+                        <FontIcon Glyph="&#xE710;"/>
+                        <TextBlock Text="添加项"/>
+                    </StackPanel>
+                </HyperlinkButton>
+            </StackPanel>
+            <Button Click="DelItem_Button_Click"
+                    Grid.Column="1"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Right"
+                    x:Name="del_I"
+                    IsEnabled="False">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <FontIcon Glyph="&#xE74D;"/>
+                    <TextBlock Text="删除此项"/>
+                </StackPanel>
+            </Button>
+
+            <Grid Grid.Column="1" x:Name="ViewGrid"/>
+
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="操作列表：" VerticalAlignment="Center"/>
+            <HyperlinkButton Grid.Row="1"
+                             Grid.Column="1"
+                             Click="AddAction_HyperlinkButton_Click"
+                             HorizontalAlignment="Center"
+                             x:Name="add_A"
+                             IsEnabled="False">
+                <StackPanel Orientation="Horizontal">
+                    <FontIcon Glyph="&#xE710;"/>
+                    <TextBlock Text="添加操作"/>
+                </StackPanel>
+            </HyperlinkButton>
+            <HyperlinkButton Foreground="Red"
+                 Click="DelAction_HyperlinkButton_Click"
+                 HorizontalAlignment="Right"
+                 Grid.Row="1"
+                 Grid.Column="1"
+                 x:Name="del_I_A"
+                 IsEnabled="False"
+                 ToolTipService.ToolTip="删除此操作">
+                <FontIcon Glyph="&#xE74D;" Width="20" Height="20"/>
+            </HyperlinkButton>
+
+            <ListView x:Name="ActionList"
+                      Grid.Row="2"
+                      Grid.Column="1"
+                      Margin="0,16,0,0"
+                      IsEnabled="False"
+                      MaxWidth="500"
+                      SelectionChanged="ActionList_SelectionChanged">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="local:SideBarItemAction">
+                            <StackPanel Padding="8" Canvas.Top="0" Canvas.Left="0">
+                                <TextBox Text="{x:Bind title1,Mode=TwoWay}" Header="操作名："/>
+                                <TextBox Text="{x:Bind description1,Mode=TwoWay}" Header="描述："/>
+                                <ToggleSwitch Header="是否启用该操作"
+                                          OnContent="启用"
+                                          OffContent="禁用"
+                                          IsOn="{x:Bind isEnable1,Mode=TwoWay}"/>
+                            </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
     </StackPanel>
 </Page>
