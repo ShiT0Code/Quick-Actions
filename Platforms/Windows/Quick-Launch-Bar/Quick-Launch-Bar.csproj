@@ -152,7 +152,7 @@
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
     <AppxBundle>Never</AppxBundle>
     <HoursBetweenUpdateChecks>144</HoursBetweenUpdateChecks>
-    <AppxPackageDir>C:\Users\hbeau\Desktop\</AppxPackageDir>
-    <AppInstallerUri>https://ghproxy.cn/https://github.com/ShiT0Code/Quick-Launch-Bar/releases/download/Latest/Quick-Launch-Bar_Latest_x 64.msix</AppInstallerUri>
+    <AppxPackageDir>C:\Users\hbeau\source\repos\Quick-Launch-Bar\Packages\Latest\</AppxPackageDir>
+    <AppInstallerUri>https://github.com/ShiT0Code/Quick-Launch-Bar/tree/Latest/Packages/Latest/Quick-Launch-Bar_x64.appinstaller</AppInstallerUri>
   </PropertyGroup>
 </Project>

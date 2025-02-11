@@ -90,18 +90,20 @@
             </Grid.RowDefinitions>
             
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" MinWidth="350"/>
-                <ColumnDefinition Width="Auto" MinWidth="400" MaxWidth="900"/>
+                <ColumnDefinition Width="350"/>
+                <ColumnDefinition Width="Auto" MinWidth="400" MaxWidth="850"/>
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.RowSpan="3">
                 <ListView ItemsSource="{x:Bind ViewModel.Items,Mode=OneWay}"
                           SelectionChanged="ListView_SelectionChanged"
-                          x:Name="SideBarList">
+                          x:Name="SideBarList"
+                          Loaded="SideBarList_Loaded">
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="local:SideBarItem">
                             <StackPanel Orientation="Horizontal"
                                     ToolTipService.ToolTip="{x:Bind description}">
+                                
                                 <TextBlock Text="{x:Bind name}" VerticalAlignment="Center"/>
                             </StackPanel>
                         </DataTemplate>
@@ -165,6 +167,10 @@
                             <StackPanel Padding="8" Canvas.Top="0" Canvas.Left="0">
                                 <TextBox Text="{x:Bind title1,Mode=TwoWay}" Header="操作名："/>
                                 <TextBox Text="{x:Bind description1,Mode=TwoWay}" Header="描述："/>
+                            <StackPanel Orientation="Horizontal" Spacing="12">
+                                <TextBox Header="图标" Text="{x:Bind actionIcon}" MinWidth="250"/>
+                                <Button Content="浏览" Click="Button_Click" VerticalAlignment="Bottom"/>
+                            </StackPanel>
                                 <ToggleSwitch Header="是否启用该操作"
                                           OnContent="启用"
                                           OffContent="禁用"

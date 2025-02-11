@@ -2,6 +2,8 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System.Collections.ObjectModel;
 using System;
+using System.IO;
+using Microsoft.UI.Xaml.Media.Imaging;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -35,7 +37,7 @@ namespace Quick_Launch_Bar.UI.Pages.Settings
         public static bool IsLoadedLeft { get; set; } = false;
 
 
-        private void LoadInfo(bool IsEe, string name, string des, int ic_path, int style)
+        private void LoadInfo(bool IsEe, string name, string des, string ic_path, int style)
         {
             ViewGrid.Children.Clear();
 
@@ -52,63 +54,114 @@ namespace Quick_Launch_Bar.UI.Pages.Settings
                 Text = name,
                 Header = "名称："
             };
-            textBox1.TextChanged += Name_TextBox1_TextChanged;
-            textBox1.LosingFocus += ChangedName_TextBox1_LosingFocus;
+            textBox1.LostFocus += TextBox1_LostFocus;
 
             TextBox textBox2 = new TextBox()
             {
                 Text = des,
                 Header = "描述："
             };
-            textBox2.TextChanged += Des_TextBox2_TextChanged;
+            textBox2.LostFocus += TextBox2_LostFocus;
 
             ComboBox comboBox = new ComboBox()
             {
-                Header = "选择一个样式"
+                Header = "选择显示样式"
             };
             comboBox.SelectionChanged += Style_ComboBox_SelectionChanged;
 
+
+            Microsoft.UI.Xaml.Controls.Image image = new()
+            {
+                Width = 48,
+                Height = 48
+            };
+            if(File.Exists(ic_path))
+                image.Source = new BitmapImage(new Uri(ic_path));
+
+            TextBox textBox3 = new TextBox()
+            {
+                Text = ic_path,
+                Header = "图标路径",
+                MinWidth = 250
+            };
+            textBox3.LostFocus += TextBox3_LostFocus;
+
+            Button button = new Button()
+            {
+                Content = "浏览",
+                VerticalAlignment = VerticalAlignment.Bottom
+            };
+            button.Click += Selected_Button_Click;
+
+            var IconEditSP = new StackPanel()
+            {
+                Spacing = 12,
+                Orientation = Orientation.Horizontal
+            };
+            IconEditSP.Children.Add(image);
+            IconEditSP.Children.Add(textBox3);
+            IconEditSP.Children.Add(button);
+
+
             var BasicStackPanel = new StackPanel()
             {
-                Spacing = 8
+                Spacing = 8,
+                MaxWidth = 850
             };
             BasicStackPanel.Children.Add(toggleSwitch);
             BasicStackPanel.Children.Add(textBox1);
             BasicStackPanel.Children.Add(textBox2);
             BasicStackPanel.Children.Add(comboBox);
+            BasicStackPanel.Children.Add(IconEditSP);
 
             ViewGrid.Children.Add(BasicStackPanel);
         }
 
-
-        private void ItemIsEnable_ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
-        {
-            ToggleSwitch toggleSwitch = (ToggleSwitch)sender;
-            item.isEnable = toggleSwitch.IsOn;
-        }
-
-        private void Name_TextBox1_TextChanged(object sender, TextChangedEventArgs e)
+        private async void TextBox3_LostFocus(object sender, RoutedEventArgs e)
         {
             TextBox textBox = (TextBox)sender;
-            item.name = textBox.Text;
+            item.iconPath = textBox.Text;
+
+            await new SettingsManager().SaveViewModelToJsonFileAsync(ViewModel, "SideBarItem.json");
         }
 
-        private void ChangedName_TextBox1_LosingFocus(UIElement sender, Microsoft.UI.Xaml.Input.LosingFocusEventArgs args)
-        {
-            SideBarList.ItemsSource = null;
-            SideBarList.ItemsSource = ViewModel.Items;
-        }
-
-        private void Des_TextBox2_TextChanged(object sender, TextChangedEventArgs e)
+        private async void TextBox2_LostFocus(object sender, RoutedEventArgs e)
         {
             TextBox textBox = (TextBox)sender;
             item.description = textBox.Text;
+
+            await new SettingsManager().SaveViewModelToJsonFileAsync(ViewModel, "SideBarItem.json");
         }
 
-        private void Style_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void TextBox1_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            if (item.name != textBox.Text)
+            {
+                item.name = textBox.Text;
+
+                SideBarList.ItemsSource = null;
+                SideBarList.ItemsSource = ViewModel.Items;
+                SideBarList.SelectedItem = item;
+            }
+
+            await new SettingsManager().SaveViewModelToJsonFileAsync(ViewModel, "SideBarItem.json");
+        }
+
+        private async void ItemIsEnable_ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
+        {
+            ToggleSwitch toggleSwitch = (ToggleSwitch)sender;
+            item.isEnable = toggleSwitch.IsOn;
+
+            await new SettingsManager().SaveViewModelToJsonFileAsync(ViewModel, "SideBarItem.json");
+        }
+
+        private async void Style_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBox comboBox = (ComboBox)sender;
             item.style = comboBox.SelectedIndex;
+
+            await new SettingsManager().SaveViewModelToJsonFileAsync(ViewModel, "SideBarItem.json");
         }
 
 
@@ -120,7 +173,7 @@ namespace Quick_Launch_Bar.UI.Pages.Settings
                 bool IsEe = selectedItem.isEnable;
                 string name = selectedItem.name;
                 string des = selectedItem.description;
-                int ic_path = selectedItem.icon;
+                string ic_path = selectedItem.iconPath;
                 int style = selectedItem.style;
 
                 add_A.IsEnabled = ActionList.IsEnabled = del_I.IsEnabled = true;
@@ -133,9 +186,9 @@ namespace Quick_Launch_Bar.UI.Pages.Settings
             }
         }
 
-        private void Selected_Button_Click(object sender, RoutedEventArgs e)
+        private async void Selected_Button_Click(object sender, RoutedEventArgs e)
         {
-
+            await new SettingsManager().SaveViewModelToJsonFileAsync(ViewModel, "SideBarItem.json");
         }
 
         private async void DelItem_Button_Click(object sender, RoutedEventArgs e)
@@ -158,21 +211,20 @@ namespace Quick_Launch_Bar.UI.Pages.Settings
                 ActionList.IsEnabled = add_A.IsEnabled = false;
 
                 ViewGrid.Children.Clear();
+
+                await new SettingsManager().SaveViewModelToJsonFileAsync(ViewModel, "SideBarItem.json");
             }
         }
 
-        private void AddItem_HyperlinkButton_Click(object sender, RoutedEventArgs e)
+        private async void AddItem_HyperlinkButton_Click(object sender, RoutedEventArgs e)
         {
             SideBarItem sideBarItem = new SideBarItem()
             {
-                name = "New",
-                description = "",
-                icon = 0,
-                style = 0,
-                isEnable = true,
-                actions = new ObservableCollection<SideBarItemAction>()
+                name = "新项"
             };
             ViewModel.Items.Add(sideBarItem);
+
+            await new SettingsManager().SaveViewModelToJsonFileAsync(ViewModel, "SideBarItem.json");
         }
 
 
@@ -204,16 +256,51 @@ namespace Quick_Launch_Bar.UI.Pages.Settings
                 item.actions.Remove(action);
 
                 del_I_A.IsEnabled = false;
+
+                await new SettingsManager().SaveViewModelToJsonFileAsync(ViewModel, "SideBarItem.json");
             }
         }
 
-        private void AddAction_HyperlinkButton_Click(object sender, RoutedEventArgs e)
+        private async void AddAction_HyperlinkButton_Click(object sender, RoutedEventArgs e)
         {
             SideBarItemAction action = new SideBarItemAction()
             {
-                title1 = "New Action"
+                title1 = "操作"
             };
             item.actions.Add(action);
+
+            await new SettingsManager().SaveViewModelToJsonFileAsync(ViewModel, "SideBarItem.json");
+        }
+
+        private async void Button_Click(object sender, RoutedEventArgs e)
+        {
+            await new SettingsManager().SaveViewModelToJsonFileAsync(ViewModel, "SideBarItem.json");
+        }
+
+
+
+        private async void SideBarList_Loaded(object sender, RoutedEventArgs e)
+        {
+            SideBarSettingsViewModel sidebarSettingsViewModel = await new SettingsManager().LoadFromJsonFileAsync<SideBarSettingsViewModel>("SideBarItem.json");
+
+            if (sidebarSettingsViewModel != null)
+            {
+                ViewModel.Items.Clear();
+                foreach (var item in sidebarSettingsViewModel.Items)
+                {
+                    ViewModel.Items.Add(item);
+                }
+            }
+            else
+            {
+                await new ContentDialog()
+                {
+                    XamlRoot = this.XamlRoot,
+                    Title = "警告",
+                    Content = "设置无法正确加载！",
+                    CloseButtonText = "确定"
+                }.ShowAsync();
+            }
         }
     }
 
@@ -224,13 +311,12 @@ namespace Quick_Launch_Bar.UI.Pages.Settings
 
         public string description { get; set; } = "";
 
-        public int icon { get; set; } = 0;
-
         public int style { get; set; } = -1;
 
         public bool isEnable { get; set; } = true;
+        public string iconPath { get; set; } = "";
 
-        public ObservableCollection<SideBarItemAction> actions = new ObservableCollection<SideBarItemAction>();
+        public ObservableCollection<SideBarItemAction> actions { get; set; } = new ObservableCollection<SideBarItemAction>();
     }
 
     public partial class SideBarItemAction
@@ -243,7 +329,7 @@ namespace Quick_Launch_Bar.UI.Pages.Settings
 
         public bool isEnable1 { get; set; } = true;
 
-        public int icon1 { get; set; } = 0;
+        public string actionIcon { get; set; } = "";
     }
     public class SideBarSettingsViewModel
     {
