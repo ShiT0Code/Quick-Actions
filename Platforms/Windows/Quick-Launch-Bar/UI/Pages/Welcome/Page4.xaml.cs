@@ -20,6 +20,7 @@ namespace Quick_Launch_Bar.UI.Pages.Welcome
         private async void NextButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
         {
             new SettingsManager().SaveBoolSetting("IsWelcomed", true);
+            new SettingsManager().SaveBoolSetting("IsNoneItem", true);
 
             await Launcher.LaunchUriAsync(new Uri("shi-qlb://settings"));
 

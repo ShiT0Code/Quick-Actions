@@ -23,7 +23,7 @@ namespace Quick_Launch_Bar.UI.Pages.Settings
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            SettingsWindow.Index = 1;
+            AllSettingsWindow.Index = 1;
             Frame.Navigate(typeof(SideBarSetting), null, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
 

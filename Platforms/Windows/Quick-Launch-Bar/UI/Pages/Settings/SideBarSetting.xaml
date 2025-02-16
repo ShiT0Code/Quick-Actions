@@ -81,7 +81,21 @@
             </Expander.Content>
         </Expander>
 
-        <TextBlock Text="查看和编辑"/>
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Stretch"
+                    Spacing="27">
+            <TextBlock Text="查看和编辑"
+                       VerticalAlignment="Center"/>
+            <Grid MinWidth="400"/>
+            <Button Content="放弃所有更改"
+                    HorizontalAlignment="Right"
+                    Click="GiveUp_Button_Click_1"/>
+            <Button Style="{StaticResource AccentButtonStyle}"
+                    HorizontalAlignment="Right"
+                    Content="保存所有更改"
+                    Click="SaveAll_Button_Click_1"/>
+        </StackPanel>
+        
         <Grid RowSpacing="8" ColumnSpacing="18">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -166,16 +180,23 @@
                     <DataTemplate x:DataType="local:SideBarItemAction">
                             <StackPanel Padding="8" Canvas.Top="0" Canvas.Left="0">
                                 <TextBox Text="{x:Bind title1,Mode=TwoWay}" Header="操作名："/>
-                                <TextBox Text="{x:Bind description1,Mode=TwoWay}" Header="描述："/>
+                            <TextBox Text="{x:Bind description1,Mode=TwoWay}" Header="描述："/>
+                            <ToggleSwitch Header="是否通知操作已执行"
+                                OnContent="显示"
+                                OffContent="不显示"
+                                IsOn="{x:Bind isShowNot,Mode=TwoWay}"/>
+                            <NumberBox Header="执行次数：" Value="{x:Bind actionTimes,Mode=TwoWay}" SmallChange="1"
+                                       SpinButtonPlacementMode="Inline" ValueChanged="NumberBox_ValueChanged"/>
                             <StackPanel Orientation="Horizontal" Spacing="12">
-                                <TextBox Header="图标" Text="{x:Bind actionIcon}" MinWidth="250"/>
-                                <Button Content="浏览" Click="Button_Click" VerticalAlignment="Bottom"/>
+                                <TextBox Header="图标" Text="{x:Bind actionIcon,Mode=TwoWay}" MinWidth="250"/>
+                                <Button Content="浏览" Click="Find_Button_Click" VerticalAlignment="Bottom"/>
                             </StackPanel>
-                                <ToggleSwitch Header="是否启用该操作"
-                                          OnContent="启用"
-                                          OffContent="禁用"
-                                          IsOn="{x:Bind isEnable1,Mode=TwoWay}"/>
-                            </StackPanel>
+                            <TextBox Text="{x:Bind action1, Mode=TwoWay}" Header="打开："/>
+                            <ToggleSwitch Header="是否启用该操作"
+                                        OnContent="启用"
+                                        OffContent="禁用"
+                                        IsOn="{x:Bind isEnable1,Mode=TwoWay}"/>
+                        </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

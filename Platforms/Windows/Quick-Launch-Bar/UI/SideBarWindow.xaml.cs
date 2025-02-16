@@ -7,11 +7,14 @@ using Quick_Launch_Bar.UI.Pages.Settings;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Controls;
 using Windows.Graphics;
-using Windows.System;
 using System.Diagnostics;
 using Microsoft.Windows.AppNotifications.Builder;
 using Microsoft.Windows.AppNotifications;
-using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.UI.Xaml.Media.Imaging;
+using System.IO;
+using Microsoft.UI.Xaml.Media;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -32,10 +35,15 @@ namespace Quick_Launch_Bar.UI
             this.SystemBackdrop = new WinUIEx.TransparentTintBackdrop();
             
             this.AppWindow.IsShownInSwitchers = false;
+
+            ViewModel = new SideBarSettingsViewModel();
         }
+        public SideBarSettingsViewModel ViewModel { get; set; }
+
 
         bool IsLeft = true;
         double scFa = 1;
+        int scw = 1920;
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
             // 设置窗口
@@ -85,14 +93,13 @@ namespace Quick_Launch_Bar.UI
             int screenWidth = monitorInfo.rcMonitor.Right - monitorInfo.rcMonitor.Left;
             int screenHeight = monitorInfo.rcMonitor.Bottom - monitorInfo.rcMonitor.Top;
 
-            // 输出显示器信息
-            float PerceOfHe = 1;
+            scw = screenWidth;
+
+            // 应用显示器信息
             float PerceOfWi = 1;
 
             if (screenWidth > 1920)
                 PerceOfWi = screenWidth / 1920;
-            if (screenHeight > 1080)
-                PerceOfHe = screenHeight / 1080;
 
             double WinX = 0;
             double WinY = screenHeight / 2 + scalingFactor * -96;
@@ -181,12 +188,12 @@ namespace Quick_Launch_Bar.UI
 
             SizeInt32 size = this.AppWindow.Size;
 
-            size.Width = size.Width + 250;
-            size.Height = size.Height + 500;
+            size.Width = (int)(size.Width + 300 * scFa);
+            size.Height = (int)(size.Height + 500 * scFa);
 
             this.AppWindow.Resize(size);
 
-            ChangeCol.Width = new GridLength(374);
+            ChangeCol.Width = new GridLength(407);
             if (IsLeft)
             {
                 Grid.SetColumn(NButton, 0);
@@ -194,8 +201,8 @@ namespace Quick_Launch_Bar.UI
             }
             else
             {
-                Grid.SetColumn(NButton, 2);
-                point.X = (int)(point.X - 380 * scFa);
+                Grid.SetColumn(NButton, 3);
+                point.X = (int)(point.X - 419 * scFa);
             }
             
 
@@ -224,12 +231,12 @@ namespace Quick_Launch_Bar.UI
                 if (IsLeft)
                 {
                     Grid.SetColumn(NButton, 2);
-                    point.X = (int)(point.X - 130 * scFa);
+                    point.X = (int)(-130 * scFa);
                 }
                 else
                 {
                     Grid.SetColumn(NButton, 0);
-                    point.X = (int)(point.X + 380 * scFa);
+                    point.X = (int)(scw - 6 * scFa);
                 }
                 this.AppWindow.Move(point);
             }
@@ -237,12 +244,12 @@ namespace Quick_Launch_Bar.UI
 
         private void Settings_Button_Click(object sender, RoutedEventArgs e)
         {
-            new SettingsWindow().Activate();
+            new AllSettingsWindow().Activate();
         }
 
-        private async void Edit_Button_Click(object sender, RoutedEventArgs e)
+        private void Edit_Button_Click(object sender, RoutedEventArgs e)
         {
-            await Launcher.LaunchUriAsync(new Uri("shi-qlb://settings/sidebar/edit"));
+            new AllSettingsWindow().Activate();
         }
 
         private void Exit_Button_Click(object sender, RoutedEventArgs e)
@@ -252,58 +259,59 @@ namespace Quick_Launch_Bar.UI
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            SetUpApp("C:\\Program Files\\Seewo\\MiniApps\\LuckyRandom\\LuckyRandom.exe", "随机抽选", false);
-            SetUpApp("C:\\Program Files\\Seewo\\MiniApps\\LuckyRandom\\LuckyRandom.exe", "随机抽选", true);
+            SetUpApp("C:\\Program Files\\Seewo\\MiniApps\\LuckyRandom\\LuckyRandom.exe", "随机抽选", true,2);
         }
 
         private void TimerButton(object sender, RoutedEventArgs e)
         {
-            SetUpApp("C:\\Program Files\\Seewo\\MiniApps\\DesktopTimer\\DesktopTimer.exe", "希沃计时器", true);
+            SetUpApp("C:\\Program Files\\Seewo\\MiniApps\\DesktopTimer\\DesktopTimer.exe", "希沃计时器", true,1);
         }
 
         private void RollCall_Button_Click(object sender, RoutedEventArgs e)
         {
-            SetUpApp("C:\\Program Files\\Seewo\\MiniApps\\RollCall\\RollCall.exe", "人数统计", false);
-            SetUpApp("C:\\Program Files\\Seewo\\MiniApps\\RollCall\\RollCall.exe", "人数统计", true);
+            SetUpApp("C:\\Program Files\\Seewo\\MiniApps\\RollCall\\RollCall.exe", "人数统计", true,2);
         }
 
         private void Button1_Click(object sender, RoutedEventArgs e)
         {
-            SetUpApp("C:\\Program Files\\Seewo\\MiniApps\\DesktopAnnotation\\DesktopAnnotation.exe", "桌面批注", true);
+            SetUpApp("C:\\Program Files\\Seewo\\MiniApps\\DesktopAnnotation\\DesktopAnnotation.exe", "桌面批注", true,1);
         }
-        private async void Button_Click_2(object sender, RoutedEventArgs e)
+        private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            await Launcher.LaunchUriAsync(new Uri("MS-SCREENCLIP://")); 
-            this.AppWindow.Hide();
-            await Task.Delay(3000);
-            this.AppWindow.Show();
+            SetUpApp("MS-SCREENCLIP://", "系统截图", false, 1);
         }
 
         private void Button2_Click(object sender, RoutedEventArgs e)
         {
-            SetUpApp("C:\\Program Files\\Seewo\\MiniApps\\DesktopCalendar\\DesktopCalendar.exe", "希沃日历", true);
+            SetUpApp("C:\\Program Files\\Seewo\\MiniApps\\DesktopCalendar\\DesktopCalendar.exe", "希沃日历", true,1);
         }
 
         private void Button3_Click(object sender, RoutedEventArgs e)
         {
-            SetUpApp("C:\\Program Files\\Seewo\\MiniApps\\DesktopMagnifier\\DesktopMagnifier.exe", "希沃放大镜",true);
+            SetUpApp("C:\\Program Files\\Seewo\\MiniApps\\DesktopMagnifier\\DesktopMagnifier.exe", "希沃放大镜", true, 1);
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            SetUpApp("C:\\Program Files\\Seewo\\MiniApps\\DesktopScreenshot\\DesktopScreenshot.exe", "希沃截图",true);
+            SetUpApp("C:\\Program Files\\Seewo\\MiniApps\\DesktopScreenshot\\DesktopScreenshot.exe", "希沃截图",true,1);
 
         }
 
-        private void SetUpApp(string executablePath, string Title,bool IsShow)
+        private void SetUpApp(string executablePath, string Title,bool IsShow, int times)
         {
             bool Result = true;
             string error = "";
             try
             {
-                // 启动 Win32 程序
-                Process.Start(executablePath);
-                Result = true;
+                for (int i=1; i < times; i++)
+                {
+                    Process.Start(new ProcessStartInfo
+                    {
+                        FileName = executablePath,
+                        UseShellExecute = true
+                    });
+                    Result = true;
+                }
             }
             catch (Exception ex)
             {
@@ -314,21 +322,24 @@ namespace Quick_Launch_Bar.UI
             var Notif = new AppNotificationBuilder();
 
             if (Result)
-                Notif.AddText($"{Title} 启动成功！");
+                Notif.AddText($"{Title} 启动成功！")
+                     .AddText($"命令：{executablePath}");
             else
             {
+                IsShow = true;
                 Notif.AddText($"{Title} 启动失败！");
                 Notif.AddText($"失败原因：{error}");
             }
 
             if(IsShow)
                 AppNotificationManager.Default.Show(Notif.BuildNotification());
+            flyout.Hide();
         }
 
 
         private void NextBu_Click(object sender, RoutedEventArgs e)
         {
-            double set = ContentSV.HorizontalOffset + 288;
+            double set = ContentSV.HorizontalOffset + 320;
 
             ContentSV.ChangeView(set, null, null);
         }
@@ -349,5 +360,251 @@ namespace Quick_Launch_Bar.UI
         {
             FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
         }
+
+
+        SideBarItem barItem = new SideBarItem();
+        private async void ActionItems_Loaded(object sender, RoutedEventArgs e)
+        {
+            SideBarSettingsViewModel sidebarSettingsViewModel = await new SettingsManager().LoadFromJsonFileAsync<SideBarSettingsViewModel>("SideBarItem.json");
+
+            if (sidebarSettingsViewModel != null)
+            {
+                ViewModel.Items.Clear();
+                foreach (var item in sidebarSettingsViewModel.Items)
+                {
+                    ViewModel.Items.Add(item);
+                }
+
+                ActionItems.Children.Clear();
+                foreach (var item in ViewModel.Items)
+                {
+                    Grid grid = new Grid()
+                    {
+                        Height = 80,
+                        Width = 80
+                    };
+                    TextBlock textBlock = new TextBlock()
+                    {
+                        HorizontalAlignment = HorizontalAlignment.Center,
+                        VerticalAlignment = VerticalAlignment.Bottom,
+                        Text = item.name
+                    };
+                    grid.Children.Add(textBlock);
+                    Image image = new()
+                    {
+                        Width = 40,
+                        Height = 30,
+                        Stretch = Stretch.Uniform
+                    };
+                    if (File.Exists(item.iconPath))
+                        image.Source = new BitmapImage(new Uri(item.iconPath));
+
+                    switch (item.style)
+                    {
+                        case 1:
+                            HyperlinkButton hyperlinkButton1 = new HyperlinkButton()
+                            {
+                                HorizontalAlignment = HorizontalAlignment.Center,
+                                VerticalAlignment = VerticalAlignment.Top,
+                                Height = 50,
+                                Width = 50,
+                                Tag = GetButtonContentTag(),
+                                Content =image
+                            };
+                            hyperlinkButton1.Click += Only_HyButton_Click;
+                            grid.Children.Add(hyperlinkButton1);
+                            break;
+                        case 2:
+                            DropDownButton dropDownButton = new()
+                            {
+                                Width = 65,
+                                Height = 50,
+                                VerticalAlignment = VerticalAlignment.Top,
+                                Content = image
+                            };
+                            image.Width = 23;
+                            MenuFlyout menuFlyout = new MenuFlyout();
+
+                            foreach (var ac_i in item.actions)
+                            {
+                                string Tag = "";
+                                Tag = $"\"{ac_i.action1}\",{ac_i.title1}," +
+                                    $"{ac_i.isShowNot},{ac_i.actionTimes}," +
+                                    $"{ac_i.isEnable1}";
+
+                                var menu1 = new MenuFlyoutItem()
+                                {
+                                    Text = ac_i.title1,
+                                    Tag = Tag
+                                };
+                                menu1.Click += MenuFlyoutItem_Click;
+
+                                menuFlyout.Items.Add(menu1);
+                            }
+
+                            dropDownButton.Flyout = menuFlyout;
+
+                            grid.Children.Add(dropDownButton);
+                            break;
+                        case 3:
+                            SplitButton splitButton = new()
+                            {
+                                Width = 80,
+                                Height = 50,
+                                VerticalAlignment = VerticalAlignment.Top,
+                                Tag = GetButtonContentTag(),
+                                Content = image
+                            };
+                            image.Width = 25;
+                            splitButton.Click += SplitButton_Click;
+                            grid.Children.Add(splitButton);
+
+                            MenuFlyout menuFlyoutList = new MenuFlyout();
+
+                            foreach (var ac_i in item.actions)
+                            {
+                                string Tag = "";
+                                Tag = $"\"{ac_i.action1}\",{ac_i.title1}," +
+                                    $"{ac_i.isShowNot},{ac_i.actionTimes}," +
+                                    $"{ac_i.isEnable1}";
+
+                                var menu1 = new MenuFlyoutItem()
+                                {
+                                    Text = ac_i.title1,
+                                    Tag = Tag
+                                };
+                                menu1.Click += MenuFlyoutItem_Click;
+
+                                menuFlyoutList.Items.Add(menu1);
+                            }
+                            if (menuFlyoutList.Items.Count > 0)
+                            {
+                                // 移除第一项
+                                menuFlyoutList.Items.RemoveAt(0);
+                            }
+
+                            splitButton.Flyout = menuFlyoutList;
+                            break;
+                        default:
+                            Button button = new Button()
+                            {
+                                HorizontalAlignment = HorizontalAlignment.Center,
+                                VerticalAlignment = VerticalAlignment.Top,
+                                Height = 50,
+                                Width = 50,
+                                Tag = GetButtonContentTag(),
+                                Content = image
+                            };
+                            button.Click += Only_Button_Click;
+                            grid.Children.Add(button);
+                            break;
+                    }
+                    ActionItems.Children.Add(grid);
+
+                    string GetButtonContentTag()
+                    {
+                        string tag = "";
+
+                        foreach(var ac_item in item.actions)
+                        {
+                            if(ac_item.isEnable1)
+                                tag = $"\"{ac_item.action1}\",{ac_item.title1}," +
+                                    $"{ac_item.isShowNot},{ac_item.actionTimes}," +
+                                    $"{ac_item.isEnable1}";
+                            break;
+                        }
+                        return tag;
+                    }
+                }
+            }
+            else if (new SettingsManager().CheckBoolSetting("IsNoneItem"))
+            {
+                ;
+            }
+            else
+            {
+                var builder = new AppNotificationBuilder()
+                    .AddText("配置文件加载失败 ！")
+                    .AddText("我们无法正确的加载你的配置文件，这将导致无法我们无法在侧边栏上显示你的配置设置");
+                AppNotificationManager.Default.Show(builder.BuildNotification());
+            }
+        }
+
+        private void SplitButton_Click(SplitButton sender, SplitButtonClickEventArgs args)
+        {
+            SplitButton spbutton = (SplitButton)sender;
+            string Tag = (string)spbutton.Tag;
+
+            if (Tag != "" || Tag != null)
+            {
+                List<string> parts = Tag.Split(',').ToList();
+
+                if (parts.Count > 0 || bool.TryParse(parts[4], out bool isE))
+                {
+                    bool.TryParse(parts[2], out bool IsShow);
+                    int.TryParse(parts[3], out int times);
+
+                    SetUpApp(parts[0], parts[1], IsShow, times);
+                }
+            }
+        }
+
+        private void MenuFlyoutItem_Click(object sender, RoutedEventArgs e)
+        {
+            MenuFlyoutItem menuFlyout = (MenuFlyoutItem)sender;
+            string Tag = (string)menuFlyout.Tag;
+
+            if (Tag != "" || Tag != null)
+            {
+                List<string> parts = Tag.Split(',').ToList();
+
+                if (parts.Count > 0 || bool.TryParse(parts[4], out bool isE))
+                {
+                    bool.TryParse(parts[2], out bool IsShow);
+                    int.TryParse(parts[3], out int times);
+
+                    SetUpApp(parts[0], parts[1], IsShow, times);
+                }
+            }
+        }
+
+        private void Only_Button_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            string Tag = (string)button.Tag;
+
+            if(Tag!=""||Tag!=null)
+            {
+                List<string> parts = Tag.Split(',').ToList();
+
+                if (parts.Count > 0 || bool.TryParse(parts[4],out bool isE))
+                {
+                    bool.TryParse(parts[2], out bool IsShow);
+                    int.TryParse(parts[3], out int times);
+
+                    SetUpApp(parts[0], parts[1], IsShow, times);
+                }
+            }
+        }
+
+        private void Only_HyButton_Click(object sender, RoutedEventArgs e)
+        {
+            HyperlinkButton button = (HyperlinkButton)sender;
+            string Tag = (string)button.Tag;
+
+            if (Tag != "" || Tag != null)
+            {
+                List<string> parts = Tag.Split(',').ToList();
+
+                if (parts.Count > 0 || bool.TryParse(parts[4], out bool isE))
+                {
+                    bool.TryParse(parts[2], out bool IsShow);
+                    int.TryParse(parts[3], out int times);
+
+                    SetUpApp(parts[0], parts[1], IsShow, times);
+                }
+            }
+        }
+
     }
 }

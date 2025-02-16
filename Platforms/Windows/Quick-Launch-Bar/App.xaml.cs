@@ -73,13 +73,13 @@ namespace Quick_Launch_Bar
                 if (new SettingsManager().CheckBoolSetting("IsWelcomed"))
                 {
                     if (firstPart == "settings")
-                        new SettingsWindow().Activate();
+                        new AllSettingsWindow().Activate();
                     else if (firstPart == "sidebar" && new SettingsManager().CheckBoolSetting("IsSideBarOn"))
                         new SideBarWindow().Activate();
                     else if (firstPart == "none")
                         NormalBoot();
                     else
-                        new SettingsWindow().Activate();
+                        new AllSettingsWindow().Activate();
                 }
                 else
                     new WelcomeWindow().Activate();
@@ -97,7 +97,7 @@ namespace Quick_Launch_Bar
                     Actioned = true;
                 }
                 if (!Actioned)
-                    m_window = new SettingsWindow();
+                    m_window = new AllSettingsWindow();
                 else
                 {
                     var Notif = new AppNotificationBuilder()

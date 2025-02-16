@@ -25,7 +25,7 @@
                    Opacity="0.6">
             <FlyoutBase.AttachedFlyout>
                 <Flyout Closed="Flyout_Closed" x:Name="flyout">
-                    <Grid Height="450" Width="320">
+                    <Grid Height="450" Width="350" RowSpacing="8">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -52,8 +52,7 @@
 
                             <HyperlinkButton Click="Edit_Button_Click"
                                  ToolTipService.ToolTip="打开 应用设置"
-                                 Foreground="{ThemeResource TextControlForeground}"
-                                 IsEnabled="False">
+                                 Foreground="{ThemeResource TextControlForeground}">
                                 <FontIcon Glyph="&#xE70F;"/>
                             </HyperlinkButton>
 
@@ -94,7 +93,7 @@
                                 <FontIcon Glyph="&#xF08D;" FontSize="10"/>
                             </Button>
                             
-                            <Button Canvas.Left="303"
+                            <Button Canvas.Left="340"
                                     Canvas.Top="20"
                                     Canvas.ZIndex="1"
                                     Click="NextBu_Click"
@@ -107,106 +106,107 @@
                             <ScrollViewer HorizontalScrollBarVisibility="Auto"
                                           VerticalScrollBarVisibility="Disabled"
                                           x:Name="ContentSV"
-                                          Canvas.Left="15"
+                                          Canvas.Left="20"
                                           Canvas.Top="0"
                                           Canvas.ZIndex="0"
-                                          Width="288">
+                                          Width="320">
                                 <StackPanel Orientation="Horizontal"
-                                    Padding="0"
-                                    Spacing="2">
-                                    <Button Style="{StaticResource ButtonWithoutBorBac}"
-                                    Click="Button_Click"
-                                    Height="70"
-                                    Width="70"
-                                    Padding="0">
+                                            Padding="0"
+                                            x:Name="ActionItems"
+                                            Loaded="ActionItems_Loaded">
+                                    <!--Button
+                                        Click="Button_Click"
+                                        Height="80"
+                                        Width="80"
+                                        Padding="0">
                                         <StackPanel>
                                             <Image Source="\Assets\Icons\Bright\SeewoLuckyRandom\Square44x44Logo.altform-unplated_targetsize-256.png" Width="23"/>
                                             <TextBlock Text="随机抽选"
-                                               Style="{StaticResource NameTextBlock}"/>
+                                                   />
                                         </StackPanel>
                                     </Button>
 
-                                    <Button Style="{StaticResource ButtonWithoutBorBac}"
+                                    <Button
                                         Click="TimerButton"
-                                        Height="70"
-                                        Width="70"
+                                        Height="80"
+                                        Width="80"
                                         Padding="0">
                                         <StackPanel>
                                             <Image Source="\Assets\Icons\Bright\SeewoDesktopTimer\Square44x44Logo.altform-unplated_targetsize-256.png" Width="23"/>
                                             <TextBlock Text="计时器"
-                                                Style="{StaticResource NameTextBlock}"/>
+                                                />
                                         </StackPanel>
                                     </Button>
 
-                                    <Button Style="{StaticResource ButtonWithoutBorBac}"
+                                    <Button 
                                             Click="RollCall_Button_Click"
-                                            Height="70"
-                                            Width="70"
+                                            Height="80"
+                                            Width="80"
                                             Padding="0">
                                         <StackPanel>
                                             <Image Source="\Assets\Icons\Bright\SeewoRollCall\Square44x44Logo.altform-unplated_targetsize-256.png" Width="25"/>
-                                            <TextBlock Style="{StaticResource NameTextBlock}"
+                                            <TextBlock 
                                                        Text="人数统计"/>
                                         </StackPanel>
                                     </Button>
 
-                                    <Button Style="{StaticResource ButtonWithoutBorBac}"
+                                    <Button 
                                         Click="Button1_Click"
-                                        Height="70"
-                                        Width="70"
+                                        Height="80"
+                                        Width="80"
                                         Padding="0">
                                         <StackPanel>
                                             <Image Source="\Assets\Icons\Bright\SeewoDesktopPen\Square44x44Logo.targetsize-256.png" Width="23"/>
                                             <TextBlock Text="桌面批注"
-                                            Style="{StaticResource NameTextBlock}"/>
+                                            />
                                         </StackPanel>
                                     </Button>
 
-                                    <Button Style="{StaticResource ButtonWithoutBorBac}"
-                                        Height="70"
-                                        Width="70"
+                                    <Button 
+                                        Height="80"
+                                        Width="80"
                                         Padding="0"
                                         Click="Button_Click_2">
                                         <StackPanel>
                                             <Image Source="\Assets\Icons\Bright\WindowSnippingTool\Square44x44Logo.targetsize-256.png" Width="23"/>
                                             <TextBlock Text="系统截图"
-                                                Style="{StaticResource NameTextBlock}"/>
+                                                />
                                         </StackPanel>
                                     </Button>
                                     
-                                    <Button Style="{StaticResource ButtonWithoutBorBac}"
+                                    <Button 
                                         Click="Button2_Click"
-                                        Height="70"
-                                        Width="70"
+                                        Height="80"
+                                        Width="80"
                                         Padding="0">
                                         <StackPanel>
                                             <Image Source="\Assets\Icons\Bright\SeewoDesktopCalendar\Square44x44Logo.targetsize-256.png" Width="23"/>
                                             <TextBlock Text="希沃日历"
-                                                Style="{StaticResource NameTextBlock}"/>
+                                                />
                                         </StackPanel>
                                     </Button>
-                                    <Button Style="{StaticResource ButtonWithoutBorBac}"
+                                    <Button 
                                         Click="Button_Click_1"
-                                        Height="70"
-                                        Width="70"
+                                        Height="80"
+                                        Width="80"
                                         Padding="0">
                                         <StackPanel>
                                             <Image Source="\Assets\Icons\Bright\SeewoDesktopScreenshot\Square44x44Logo.altform-unplated_targetsize-256.png" Width="23"/>
-                                            <TextBlock Style="{StaticResource NameTextBlock}" Text="希沃截图"/>
+                                            <TextBlock  Text="希沃截图"/>
                                         </StackPanel>
                                     </Button>
 
-                                    <Button Style="{StaticResource ButtonWithoutBorBac}"
+                                    <Button 
                                         Click="Button3_Click"
-                                        Height="70"
-                                        Width="70"
+                                        Height="80"
+                                        Width="80"
                                         Padding="0">
                                         <StackPanel>
                                             <Image Source="\Assets\Icons\Bright\SeewoDesktopMagnifier\Square44x44Logo.altform-unplated_targetsize-256.png" Width="23"/>
                                             <TextBlock Text="希沃放大镜"
-                                                Style="{StaticResource NameTextBlock}"/>
+                                                />
                                         </StackPanel>
-                                    </Button>
+                                    </Button-->
                                 </StackPanel>
                             </ScrollViewer>
                         </Canvas>

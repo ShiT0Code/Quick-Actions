@@ -37,6 +37,8 @@ namespace Quick_Launch_Bar
             return result;
         }
 
+#pragma warning disable CS8600 // 将 null 字面量或可能为 null 的值转换为非 null 类型。
+#pragma warning disable CS8603 // 可能返回 null 引用。
         public async Task<bool> SaveViewModelToJsonFileAsync<T>(T data, string suggestedFileName)
         {
             try
@@ -86,13 +88,18 @@ namespace Quick_Launch_Bar
             }
             catch (Exception ex)
             {
-                var builder = new AppNotificationBuilder()
+                if(CheckBoolSetting("IsNone"))
+                {
+                    var builder = new AppNotificationBuilder()
                     .AddText("数据加载失败！")
                     .AddText($"失败原因：{ex.Message}");
-                AppNotificationManager.Default.Show(builder.BuildNotification());
+                    AppNotificationManager.Default.Show(builder.BuildNotification());
+                }
 
                 return default;
             }
         }
+#pragma warning restore CS8603 // 可能返回 null 引用。
+#pragma warning restore CS8600 // 将 null 字面量或可能为 null 的值转换为非 null 类型。
     }
 }

@@ -23,6 +23,7 @@
     <None Remove="Assets\AppIcon\StoreLogo.scale-150.png" />
     <None Remove="Assets\AppIcon\StoreLogo.scale-200.png" />
     <None Remove="Assets\AppIcon\StoreLogo.scale-400.png" />
+    <None Remove="UI\AllSettingsWindow.xaml" />
     <None Remove="UI\ExitingWarning.xaml" />
     <None Remove="UI\Pages\Settings\About.xaml" />
     <None Remove="UI\Pages\Settings\DashBoard.xaml" />
@@ -31,10 +32,8 @@
     <None Remove="UI\Pages\Welcome\Page2.xaml" />
     <None Remove="UI\Pages\Welcome\Page3.xaml" />
     <None Remove="UI\Pages\Welcome\Page4.xaml" />
-    <None Remove="UI\SettingsWindow.xaml" />
     <None Remove="UI\SideBarWindow.xaml" />
     <None Remove="UI\WelcomeWindow.xaml" />
-    <None Remove="UI_Styles.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -67,12 +66,12 @@
     <PackageReference Include="WinUIEx" Version="2.5.1" />
   </ItemGroup>
   <ItemGroup>
-    <Page Update="UI\ExitingWarning.xaml">
+    <Page Update="UI\AllSettingsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="UI_Styles.xaml">
+    <Page Update="UI\ExitingWarning.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
@@ -88,11 +87,6 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="UI\Pages\Settings\About.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Update="UI\SettingsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
@@ -145,7 +139,7 @@
     <DefaultLanguage>zh-hans-cn</DefaultLanguage>
     <PackageCertificateThumbprint>06DC9FBFF114566B2CC15A7A493A998D09D142E8</PackageCertificateThumbprint>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
-    <GenerateAppInstallerFile>True</GenerateAppInstallerFile>
+    <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
@@ -153,6 +147,6 @@
     <AppxBundle>Never</AppxBundle>
     <HoursBetweenUpdateChecks>144</HoursBetweenUpdateChecks>
     <AppxPackageDir>C:\Users\hbeau\source\repos\Quick-Launch-Bar\Packages\Latest\</AppxPackageDir>
-    <AppInstallerUri>https://github.com/ShiT0Code/Quick-Launch-Bar/tree/Latest/Packages/Latest/Quick-Launch-Bar_x64.appinstaller</AppInstallerUri>
+    <AppInstallerUri>https://shit0code.github.io/ShiT0Code-Personal-WebSite/Downloads/Resources/Latest/Quick-Launch-Bar_x64.appinstaller</AppInstallerUri>
   </PropertyGroup>
 </Project>
