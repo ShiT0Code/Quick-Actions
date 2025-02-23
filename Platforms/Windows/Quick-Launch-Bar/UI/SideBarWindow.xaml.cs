@@ -247,54 +247,9 @@ namespace Quick_Launch_Bar.UI
             new AllSettingsWindow().Activate();
         }
 
-        private void Edit_Button_Click(object sender, RoutedEventArgs e)
-        {
-            new AllSettingsWindow().Activate();
-        }
-
         private void Exit_Button_Click(object sender, RoutedEventArgs e)
         {
             new ExitingWarning().Activate();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            SetUpApp("C:\\Program Files\\Seewo\\MiniApps\\LuckyRandom\\LuckyRandom.exe", "随机抽选", true,2);
-        }
-
-        private void TimerButton(object sender, RoutedEventArgs e)
-        {
-            SetUpApp("C:\\Program Files\\Seewo\\MiniApps\\DesktopTimer\\DesktopTimer.exe", "希沃计时器", true,1);
-        }
-
-        private void RollCall_Button_Click(object sender, RoutedEventArgs e)
-        {
-            SetUpApp("C:\\Program Files\\Seewo\\MiniApps\\RollCall\\RollCall.exe", "人数统计", true,2);
-        }
-
-        private void Button1_Click(object sender, RoutedEventArgs e)
-        {
-            SetUpApp("C:\\Program Files\\Seewo\\MiniApps\\DesktopAnnotation\\DesktopAnnotation.exe", "桌面批注", true,1);
-        }
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            SetUpApp("MS-SCREENCLIP://", "系统截图", false, 1);
-        }
-
-        private void Button2_Click(object sender, RoutedEventArgs e)
-        {
-            SetUpApp("C:\\Program Files\\Seewo\\MiniApps\\DesktopCalendar\\DesktopCalendar.exe", "希沃日历", true,1);
-        }
-
-        private void Button3_Click(object sender, RoutedEventArgs e)
-        {
-            SetUpApp("C:\\Program Files\\Seewo\\MiniApps\\DesktopMagnifier\\DesktopMagnifier.exe", "希沃放大镜", true, 1);
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            SetUpApp("C:\\Program Files\\Seewo\\MiniApps\\DesktopScreenshot\\DesktopScreenshot.exe", "希沃截图",true,1);
-
         }
 
         private void SetUpApp(string executablePath, string Title,bool IsShow, int times)
@@ -303,7 +258,7 @@ namespace Quick_Launch_Bar.UI
             string error = "";
             try
             {
-                for (int i=1; i < times; i++)
+                for (int i = 0; i < times; i++)
                 {
                     Process.Start(new ProcessStartInfo
                     {

@@ -38,7 +38,7 @@ namespace Quick_Launch_Bar.UI.Pages.Settings
         public static bool IsLoadedLeft { get; set; } = false;
 
 
-        private void LoadInfo(bool IsEe, string name, string des, string ic_path,string ic_Path_dark, int style)
+        private void LoadInfo(bool IsEe, string name, string des, string ic_path, int style)
         {
             ViewGrid.Children.Clear();
 
@@ -92,14 +92,6 @@ namespace Quick_Launch_Bar.UI.Pages.Settings
             };
             textBox3.LostFocus += TextBox3_LostFocus;
 
-            Button button = new Button()
-            {
-                Content = "浏览",
-                VerticalAlignment = VerticalAlignment.Bottom,
-                IsEnabled = false
-            };
-            button.Click += Selected_Button_Click;
-
             var IconEditSP = new StackPanel()
             {
                 Spacing = 12,
@@ -107,43 +99,6 @@ namespace Quick_Launch_Bar.UI.Pages.Settings
             };
             IconEditSP.Children.Add(image);
             IconEditSP.Children.Add(textBox3);
-            IconEditSP.Children.Add(button);
-
-
-
-            Microsoft.UI.Xaml.Controls.Image image_dark = new()
-            {
-                Width = 48,
-                Height = 48
-            };
-            if (File.Exists(ic_Path_dark))
-                image_dark.Source = new BitmapImage(new Uri(ic_Path_dark));
-
-            TextBox textBox3_dark = new TextBox()
-            {
-                Text = ic_Path_dark,
-                Header = "深色模式图标路径",
-                MinWidth = 250
-            };
-            textBox3_dark.LostFocus += TextBox3_dark_LostFocus;
-
-            Button button_dark = new Button()
-            {
-                Content = "浏览",
-                VerticalAlignment = VerticalAlignment.Bottom,
-                IsEnabled = false
-            };
-            button_dark.Click += Select_Button_dark_Click;
-
-            var IconEditSP_dark = new StackPanel()
-            {
-                Spacing = 12,
-                Orientation = Orientation.Horizontal
-            };
-            IconEditSP_dark.Children.Add(image_dark);
-            IconEditSP_dark.Children.Add(textBox3_dark);
-            IconEditSP_dark.Children.Add(button_dark);
-
 
             var BasicStackPanel = new StackPanel()
             {
@@ -156,7 +111,6 @@ namespace Quick_Launch_Bar.UI.Pages.Settings
             BasicStackPanel.Children.Add(textBox2);
             BasicStackPanel.Children.Add(comboBox);
             BasicStackPanel.Children.Add(IconEditSP);
-            BasicStackPanel.Children.Add(IconEditSP_dark);
 
             ViewGrid.Children.Add(BasicStackPanel);
         }
@@ -165,17 +119,6 @@ namespace Quick_Launch_Bar.UI.Pages.Settings
         {
             ComboBox comboBox = (ComboBox)sender;
             item.style = comboBox.SelectedIndex;
-        }
-
-        private void Select_Button_dark_Click(object sender, RoutedEventArgs e)
-        {
-            ;
-        }
-
-        private void TextBox3_dark_LostFocus(object sender, RoutedEventArgs e)
-        {
-            TextBox textBox = (TextBox)sender;
-            item.iconPathDark = textBox.Text;
         }
 
         private void TextBox3_LostFocus(object sender, RoutedEventArgs e)
@@ -219,22 +162,18 @@ namespace Quick_Launch_Bar.UI.Pages.Settings
                 string name = selectedItem.name;
                 string des = selectedItem.description;
                 string ic_path = selectedItem.iconPath;
-                string ic_path_dark = selectedItem.iconPathDark;
                 int style = selectedItem.style;
 
                 add_A.IsEnabled = ActionList.IsEnabled = del_I.IsEnabled = true;
 
                 ActionList.ItemsSource = selectedItem.actions;
 
-                LoadInfo(IsEe, name, des, ic_path,ic_path_dark, style);
+                LoadInfo(IsEe, name, des, ic_path, style);
 
                 item = selectedItem;
             }
         }
 
-        private void Selected_Button_Click(object sender, RoutedEventArgs e)
-        {
-        }
 
         private async void DelItem_Button_Click(object sender, RoutedEventArgs e)
         {
@@ -312,12 +251,6 @@ namespace Quick_Launch_Bar.UI.Pages.Settings
             item.actions.Add(action);
         }
 
-        private void Find_Button_Click(object sender, RoutedEventArgs e)
-        {
-        }
-
-
-
         private void SideBarList_Loaded(object sender, RoutedEventArgs e)
         {
             LoadData();
@@ -386,8 +319,6 @@ namespace Quick_Launch_Bar.UI.Pages.Settings
 
         public bool isEnable { get; set; } = true;
         public string iconPath { get; set; } = "";
-        public string iconPathDark { get; set; } = "";
-
         public ObservableCollection<SideBarItemAction> actions { get; set; } = new ObservableCollection<SideBarItemAction>();
     }
 
@@ -404,9 +335,6 @@ namespace Quick_Launch_Bar.UI.Pages.Settings
         public bool isShowNot { get; set; } = true;
 
         public int actionTimes { get; set; } = 1;
-
-        public string actionIcon { get; set; } = "";
-        public string actionIconDark { get; set; } = "";
     }
     public class SideBarSettingsViewModel
     {

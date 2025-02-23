@@ -187,10 +187,6 @@
                                 IsOn="{x:Bind isShowNot,Mode=TwoWay}"/>
                             <NumberBox Header="执行次数：" Value="{x:Bind actionTimes,Mode=TwoWay}" SmallChange="1"
                                        SpinButtonPlacementMode="Inline" ValueChanged="NumberBox_ValueChanged"/>
-                            <StackPanel Orientation="Horizontal" Spacing="12">
-                                <TextBox Header="图标" Text="{x:Bind actionIcon,Mode=TwoWay}" MinWidth="250"/>
-                                <Button Content="浏览" Click="Find_Button_Click" VerticalAlignment="Bottom"/>
-                            </StackPanel>
                             <TextBox Text="{x:Bind action1, Mode=TwoWay}" Header="打开："/>
                             <ToggleSwitch Header="是否启用该操作"
                                         OnContent="启用"

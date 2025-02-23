@@ -30,6 +30,7 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
@@ -48,12 +49,6 @@
                                              ToolTipService.ToolTip="打开 应用设置"
                                              Foreground="{ThemeResource TextControlForeground}">
                                 <FontIcon Glyph="&#xE713;"/>
-                            </HyperlinkButton>
-
-                            <HyperlinkButton Click="Edit_Button_Click"
-                                 ToolTipService.ToolTip="打开 应用设置"
-                                 Foreground="{ThemeResource TextControlForeground}">
-                                <FontIcon Glyph="&#xE70F;"/>
                             </HyperlinkButton>
 
                             <HyperlinkButton Foreground="{ThemeResource TextControlForeground}"
@@ -113,101 +108,7 @@
                                 <StackPanel Orientation="Horizontal"
                                             Padding="0"
                                             x:Name="ActionItems"
-                                            Loaded="ActionItems_Loaded">
-                                    <!--Button
-                                        Click="Button_Click"
-                                        Height="80"
-                                        Width="80"
-                                        Padding="0">
-                                        <StackPanel>
-                                            <Image Source="\Assets\Icons\Bright\SeewoLuckyRandom\Square44x44Logo.altform-unplated_targetsize-256.png" Width="23"/>
-                                            <TextBlock Text="随机抽选"
-                                                   />
-                                        </StackPanel>
-                                    </Button>
-
-                                    <Button
-                                        Click="TimerButton"
-                                        Height="80"
-                                        Width="80"
-                                        Padding="0">
-                                        <StackPanel>
-                                            <Image Source="\Assets\Icons\Bright\SeewoDesktopTimer\Square44x44Logo.altform-unplated_targetsize-256.png" Width="23"/>
-                                            <TextBlock Text="计时器"
-                                                />
-                                        </StackPanel>
-                                    </Button>
-
-                                    <Button 
-                                            Click="RollCall_Button_Click"
-                                            Height="80"
-                                            Width="80"
-                                            Padding="0">
-                                        <StackPanel>
-                                            <Image Source="\Assets\Icons\Bright\SeewoRollCall\Square44x44Logo.altform-unplated_targetsize-256.png" Width="25"/>
-                                            <TextBlock 
-                                                       Text="人数统计"/>
-                                        </StackPanel>
-                                    </Button>
-
-                                    <Button 
-                                        Click="Button1_Click"
-                                        Height="80"
-                                        Width="80"
-                                        Padding="0">
-                                        <StackPanel>
-                                            <Image Source="\Assets\Icons\Bright\SeewoDesktopPen\Square44x44Logo.targetsize-256.png" Width="23"/>
-                                            <TextBlock Text="桌面批注"
-                                            />
-                                        </StackPanel>
-                                    </Button>
-
-                                    <Button 
-                                        Height="80"
-                                        Width="80"
-                                        Padding="0"
-                                        Click="Button_Click_2">
-                                        <StackPanel>
-                                            <Image Source="\Assets\Icons\Bright\WindowSnippingTool\Square44x44Logo.targetsize-256.png" Width="23"/>
-                                            <TextBlock Text="系统截图"
-                                                />
-                                        </StackPanel>
-                                    </Button>
-                                    
-                                    <Button 
-                                        Click="Button2_Click"
-                                        Height="80"
-                                        Width="80"
-                                        Padding="0">
-                                        <StackPanel>
-                                            <Image Source="\Assets\Icons\Bright\SeewoDesktopCalendar\Square44x44Logo.targetsize-256.png" Width="23"/>
-                                            <TextBlock Text="希沃日历"
-                                                />
-                                        </StackPanel>
-                                    </Button>
-                                    <Button 
-                                        Click="Button_Click_1"
-                                        Height="80"
-                                        Width="80"
-                                        Padding="0">
-                                        <StackPanel>
-                                            <Image Source="\Assets\Icons\Bright\SeewoDesktopScreenshot\Square44x44Logo.altform-unplated_targetsize-256.png" Width="23"/>
-                                            <TextBlock  Text="希沃截图"/>
-                                        </StackPanel>
-                                    </Button>
-
-                                    <Button 
-                                        Click="Button3_Click"
-                                        Height="80"
-                                        Width="80"
-                                        Padding="0">
-                                        <StackPanel>
-                                            <Image Source="\Assets\Icons\Bright\SeewoDesktopMagnifier\Square44x44Logo.altform-unplated_targetsize-256.png" Width="23"/>
-                                            <TextBlock Text="希沃放大镜"
-                                                />
-                                        </StackPanel>
-                                    </Button-->
-                                </StackPanel>
+                                            Loaded="ActionItems_Loaded"/>
                             </ScrollViewer>
                         </Canvas>
                     </Grid>
