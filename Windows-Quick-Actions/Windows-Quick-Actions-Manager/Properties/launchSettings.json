@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Windows-Quick-Actions-Manager (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Windows-Quick-Actions-Manager (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
